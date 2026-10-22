@@ -1,22 +1,11 @@
-import { useEffect } from 'react';
-import { useS } from 'use-s-react';
-import { useDisclosure } from '@mantine/hooks';
-import { Table, Checkbox, type TableData, Button, Switch, Group, Collapse, useMantineTheme, ScrollArea } from '@mantine/core';
-import { GripTranslation, MuscleGroupTranslation, type Grip, type MuscleGroup } from '@/functions/training';
-import type { SetType } from '@/functions/rm';
-import { store, type Lang } from '@/store';
+import { useEffect } from 'react'
+import { useS } from 'use-s-react'
+import { useDisclosure } from '@mantine/hooks'
+import { WatchIcon } from '@phosphor-icons/react';
+import { Table, Checkbox, type TableData, Button, Group, Collapse, useMantineTheme, ScrollArea } from '@mantine/core'
+import { GripTranslation, MuscleGroupTranslation, type Grip, type MuscleGroup } from '@/functions/training'
+import { store } from '@/store'
 import s from "./exercise-table.module.css"
-
-const setTypeTranslation: Record<Lang, Record<SetType, string>> = {
-  en: {
-    strength: "Strength",
-    hypertrophy: "Hypertrophy"
-  },
-  es: {
-    strength: "Fuerza",
-    hypertrophy: "Hipertrofia"
-  }
-}
 
 const columns = {
   en: ['order', 'name', 'rm', 'approx', 'effective', 'grip',  'description'],
@@ -24,25 +13,10 @@ const columns = {
 }
 
 export default function ExerciseTable() {
-  const {theme, lang, setType,  expanded, workouts, toggle, getData, setSelected } = useExerciseTable()
+  const {theme, lang, expanded, workouts, toggle, getData, handleStart } = useExerciseTable()
 
   return (
     <div className={s.tabContainer}>
-      <Group justify="center" mb={5}>
-        <Button mb="md" onClick={toggle}>{lang === 'en'? 'Show/Hide Table' : 'Ver/Ocultar Tabla' }</Button>
-
-        <Switch
-          defaultChecked
-          size="xl"
-          color="dark.4"
-          style={{ marginBottom: "16px" }}
-          checked={setType === 'hypertrophy'}
-          onChange={(event) => setSelected({setType: event.currentTarget.checked ? 'hypertrophy' : 'strength'})}
-          offLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['strength']}</p>}
-          onLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['hypertrophy']}</p>}
-        />
-      </Group>
-
       <ScrollArea
         scrollbars="x"
         offsetScrollbars
@@ -68,11 +42,24 @@ export default function ExerciseTable() {
                   maxWidth: "max-content",
                   whiteSpace: "nowrap",
                 },
+                caption: {
+                  textAlign: "left"
+                }
               }}
             />
           ))}
         </Collapse>
       </ScrollArea>
+
+      <Group justify="center" gap="xl">
+        <Button onClick={toggle}>{lang === 'en'? 'Show/Hide Table' : 'Ver/Ocultar Tabla' }</Button>
+        <Button
+          onClick={handleStart}
+          variant="outline"
+          leftSection={<WatchIcon size={25} />}
+          color="red"
+        >{lang === 'en'? 'Start' : 'Iniciar' }</Button>
+      </Group>
     </div>
   )
 }
@@ -80,10 +67,12 @@ export default function ExerciseTable() {
 function useExerciseTable() {
   const theme = useMantineTheme()
   const [lang] = useS(store.globalLang)
-  const [{ workouts } ] = useS(store.globalTodaysWorkout)
-  const [{ setType, selected }, setSelected] = useS(store.globalSelectedExercises)
-  const [expanded, { toggle }] = useDisclosure(true)
   const [training] = useS(store.globalTraining)
+  const [{ workouts } ] = useS(store.globalTodaysWorkout)
+  const [_, setTime] = useS(store.globalToday)
+  const [{ selected }, setSelected] = useS(store.globalSelectedExercises)
+
+  const [expanded, { toggle }] = useDisclosure(true)
 
   const getBodysTable = (g: MuscleGroup) => {
     if (training && Object.keys(training).includes(g)) {
@@ -142,6 +131,16 @@ function useExerciseTable() {
     }
   }
 
+  const handleStart = () => {
+    const now = new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).toLowerCase()
+
+    setTime({ startTime: now })
+  }
+
   useEffect(() => {
     if (selected.length === 0) setSelected({ showActionBar: false })
     else setSelected({ showActionBar: true })
@@ -150,12 +149,11 @@ function useExerciseTable() {
   return {
     theme,
     lang,
-    setType,
     expanded,
     workouts,
     selected,
     toggle,
     getData,
-    setSelected
+    handleStart
   }
 }

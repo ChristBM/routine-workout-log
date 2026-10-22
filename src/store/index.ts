@@ -16,7 +16,10 @@ export type StoreType = {
     persist?: boolean
   }
   globalToday: {
-    value: Date
+    value: {
+      today: Date
+      startTime: string
+    }
     readonly key: 'global-today'
   }
   globalTodaysWorkout: {
@@ -59,7 +62,10 @@ export const store: StoreType = {
     persist: true
   },
   globalToday: {
-    value: new Date(),
+    value: {
+      today: new Date(),
+      startTime: ""
+    },
     key: 'global-today'
   },
   globalTodaysWorkout: {

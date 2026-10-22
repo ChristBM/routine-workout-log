@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useS } from 'use-s-react';
 import { Button, Group, MultiSelect, Select, Switch } from '@mantine/core';
-import { BarbellIcon, LockIcon, LockOpenIcon } from '@phosphor-icons/react';
+import { BarbellIcon, LockIcon, LockOpenIcon, PlusIcon } from '@phosphor-icons/react';
 import type { MuscleGroup } from '@/functions/training';
+import type { SetType } from '@/functions/rm';
 import { ApproxArr, EffectArr, store, type Lang } from '@/store';
 
 import s from "./workout-selector.module.css"
@@ -109,16 +110,27 @@ const MULTI_SELECT = {
   en: ["What kind of workout do you want to do today?", "Select or search", "Nothing found..."]
 }
 
+const setTypeTranslation: Record<Lang, Record<SetType, string>> = {
+  en: {
+    strength: "Strength",
+    hypertrophy: "Hypertrophy"
+  },
+  es: {
+    strength: "Fuerza",
+    hypertrophy: "Hipertrofia"
+  }
+}
+
 const icon = <BarbellIcon size={20} />;
 
 export default function WorkoutSelector() {
-  const { lang, locked, value, rest, setValue, setLock, setSelected, handleAddWorkout } = useWorkoutSelector()
+  const { lang, locked, value, rest, setType, setValue, setLock, setSelected, handleAddWorkout } = useWorkoutSelector()
 
   return (
     <div className={s.selectorContainer}>
       <div className={s.selectorBox}>
         <MultiSelect
-          label={<p style={{fontSize: "16px"}}>{MULTI_SELECT[lang][0]}</p>}
+          label={<p style={{fontSize: "15px"}}>{MULTI_SELECT[lang][0]}</p>}
           placeholder={MULTI_SELECT[lang][1]}
           data={WORKOUT[lang]}
           nothingFoundMessage={MULTI_SELECT[lang][2]}
@@ -130,31 +142,11 @@ export default function WorkoutSelector() {
           onChange={setValue}
           comboboxProps={{ transitionProps: { transition: 'pop', duration: 200 } }}
           leftSection={icon}
-          size="lg"
+          size="md"
+          w={350}
           radius="sm"
           success=""
           disabled={locked}
-        />
-      </div>
-
-      <div className={s.controls}>
-        <Button
-          mb="md"
-          onClick={handleAddWorkout}
-          disabled={locked || value.length === 0}
-        >
-          {lang === "es" ? "Agregar": "Add"}
-        </Button>
-
-        <Switch
-          size="lg"
-          color="dark.4"
-          checked={locked}
-          style={{ marginBottom: "16px" }}
-          onChange={(event) => setLock(event.currentTarget.checked)}
-          offLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)"/>}
-          onLabel={<LockIcon size={20} color="var(--mantine-color-red-4)" />}
-          label={locked ? (lang === 'en' ? "Locked " : "Bloqueado") : lang === 'en' ? "Unlocked" : "Desbloqueado" }
         />
       </div>
 
@@ -181,6 +173,36 @@ export default function WorkoutSelector() {
           onChange={(val) => setSelected({ rest: { effect: val ?? 1 } })}
         />
       </Group>
+
+      <Group justify="center" gap="md">
+        <Button
+          leftSection={<PlusIcon size={20} />}
+          onClick={handleAddWorkout}
+          disabled={locked || value.length === 0}
+        >
+          {lang === "es" ? "Agregar": "Add"}
+        </Button>
+
+        <Switch
+          size="xl"
+          color="dark.4"
+          defaultChecked
+          disabled={locked || value.length === 0}
+          checked={setType === 'hypertrophy'}
+          onChange={(event) => setSelected({setType: event.currentTarget.checked ? 'hypertrophy' : 'strength'})}
+          offLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['strength']}</p>}
+          onLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['hypertrophy']}</p>}
+        />
+
+        <Switch
+          size="xl"
+          color="dark.4"
+          checked={locked}
+          onChange={(event) => setLock(event.currentTarget.checked)}
+          offLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)"/>}
+          onLabel={<LockIcon size={20} color="var(--mantine-color-red-4)" />}
+        />
+      </Group>
     </div>
   )
 }
@@ -189,9 +211,9 @@ function useWorkoutSelector() {
   const [value, setValue] = useS<MuscleGroup[]>([])
   const [locked, setLock] = useS(false)
   const [lang] = useS(store.globalLang)
-  const [today] = useS(store.globalToday)
+  const [{ today }] = useS(store.globalToday)
   const [{ day, workouts }, setTodaysWorkout ] = useS(store.globalTodaysWorkout)
-  const [{ rest }, setSelected ] = useS(store.globalSelectedExercises)
+  const [{ rest, setType }, setSelected ] = useS(store.globalSelectedExercises)
 
   const handleAddWorkout = () => {
     setTodaysWorkout({ workouts: value })
@@ -214,6 +236,7 @@ function useWorkoutSelector() {
     locked,
     value,
     rest,
+    setType,
     setValue,
     setLock,
     setSelected,

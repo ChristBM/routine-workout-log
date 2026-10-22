@@ -189,6 +189,7 @@ function useRoutine() {
   const theme = useMantineTheme()
   const [lang] = useS(store.globalLang)
   const [training] = useS(store.globalTraining)
+  const [_, setTime] = useS(store.globalToday)
   const [{ workouts }, setWorkouts] = useS(store.globalTodaysWorkout)
   const [trainingUpdates, setTrainingUpdates] = useS(store.globalTrainingUpdates)
   const [{ selected, setType, rest, showActionBar }, setSelected] = useS(store.globalSelectedExercises)
@@ -235,6 +236,14 @@ function useRoutine() {
     }, {} as Partial<Record<MuscleGroup, PartialTrainingSet[]>>)
 
     preserveUpdates(routineUpdates)
+
+    const now = new Date().toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).toLowerCase()
+
+    setTime((prev) => ({ ...prev, startTime: prev.startTime + " -- " + now }))
 
     setWorkouts({ workouts: [] })
     setSelected({ selected: [], showActionBar: false })

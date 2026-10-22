@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useS } from "use-s-react";
+import { Space, Text, useMantineTheme } from "@mantine/core";
 import type { MuscleGroup, PartialTrainingSet, TrainingSet } from "@/functions/training";
 import { store } from "@/store";
 
@@ -9,15 +10,29 @@ const WEEK_DAYS = {
 }
 
 export default function WeekDay() {
-  const [lang] = useS(store.globalLang)
-  const [today] = useS(store.globalToday)
-  useUpdateTraining()
+  const { theme, lang, today, startTime } = useWeekDay()
 
   return (
     <div>
       {WEEK_DAYS[lang][today.getDay()]}
+      <Space />
+      <Text size="xs" style={{ color: theme.colors.neonGreen[9] }}>{startTime}</Text>
     </div>
   )
+}
+
+function useWeekDay() {
+  const theme = useMantineTheme()
+  const [lang] = useS(store.globalLang)
+  const [{ today, startTime }] = useS(store.globalToday)
+  useUpdateTraining()
+
+  return {
+    theme,
+    lang,
+    today,
+    startTime
+  }
 }
 
 function useUpdateTraining() {
