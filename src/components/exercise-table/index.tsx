@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useS } from 'use-s-react';
 import { useDisclosure } from '@mantine/hooks';
-import { Table, Checkbox, type TableData, Button, Switch, Group, Collapse, useMantineTheme } from '@mantine/core';
+import { Table, Checkbox, type TableData, Button, Switch, Group, Collapse, useMantineTheme, ScrollArea } from '@mantine/core';
 import { GripTranslation, MuscleGroupTranslation, type Grip, type MuscleGroup } from '@/functions/training';
 import type { SetType } from '@/functions/rm';
 import { store, type Lang } from '@/store';
@@ -33,39 +33,46 @@ export default function ExerciseTable() {
 
         <Switch
           defaultChecked
-          size="lg"
+          size="xl"
           color="dark.4"
           style={{ marginBottom: "16px" }}
           checked={setType === 'hypertrophy'}
           onChange={(event) => setSelected({setType: event.currentTarget.checked ? 'hypertrophy' : 'strength'})}
-          onLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['strength']}</p>}
-          offLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['hypertrophy']}</p>}
-          label={`${lang === 'en' ? "You have selected the workout for: " : "Seleccionaste entrenamiento de: "} ${setTypeTranslation[lang][setType]}`}
+          offLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['strength']}</p>}
+          onLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['hypertrophy']}</p>}
         />
       </Group>
 
-      <Collapse
-        expanded={expanded}
-        transitionDuration={1000}
-        transitionTimingFunction="linear"
+      <ScrollArea
+        scrollbars="x"
+        offsetScrollbars
       >
-        {workouts.map(g => (
-          <Table
-            stickyHeader
-            stickyHeaderOffset={60}
-            horizontalSpacing="md"
-            verticalSpacing="md"
-            captionSide="top"
-            withTableBorder
-            withColumnBorders
-            highlightOnHover
-            data={getData(g)}
-            key={g}
-            style={{ marginBlockEnd: "20px"}}
-            borderColor={theme.colors.neonGreen[9]}
-          />
-        ))}
-      </Collapse>
+        <Collapse
+          expanded={expanded}
+          transitionDuration={1000}
+          transitionTimingFunction="linear"
+        >
+          {workouts.map(g => (
+            <Table
+              stickyHeader
+              captionSide="top"
+              withTableBorder
+              withColumnBorders
+              highlightOnHover
+              data={getData(g)}
+              key={g}
+              style={{ marginBlockEnd: "20px"}}
+              borderColor={theme.colors.neonGreen[9]}
+              styles={{
+                td: {
+                  maxWidth: "max-content",
+                  whiteSpace: "nowrap",
+                },
+              }}
+            />
+          ))}
+        </Collapse>
+      </ScrollArea>
     </div>
   )
 }

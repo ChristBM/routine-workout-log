@@ -13,8 +13,8 @@ export default function LangSwitch() {
         color="dark.4"
         checked={lang === 'en'}
         onChange={(event) => setLang(event.currentTarget.checked ? 'en': 'es')}
-        onLabel="ES"
-        offLabel="EN"
+        offLabel="ES"
+        onLabel="EN"
       />
     </div>
   )

@@ -105,8 +105,8 @@ export const WORKOUT: Record<Lang, Workout[]> = {
 }
 
 const MULTI_SELECT = {
-  es: ["¿Qué tipo de entrenamiento quieres hacer hoy?", "Selecciona al menos uno", "No encontrado..."],
-  en: ["What kind of workout do you want to do today?", "Select at least one", "Nothing found..."]
+  es: ["¿Qué tipo de entrenamiento quieres hacer hoy?", "Seleccionar o buscar", "No encontrado..."],
+  en: ["What kind of workout do you want to do today?", "Select or search", "Nothing found..."]
 }
 
 const icon = <BarbellIcon size={20} />;
@@ -118,11 +118,10 @@ export default function WorkoutSelector() {
     <div className={s.selectorContainer}>
       <div className={s.selectorBox}>
         <MultiSelect
-          label={MULTI_SELECT[lang][0]}
+          label={<p style={{fontSize: "16px"}}>{MULTI_SELECT[lang][0]}</p>}
           placeholder={MULTI_SELECT[lang][1]}
           data={WORKOUT[lang]}
           nothingFoundMessage={MULTI_SELECT[lang][2]}
-          withAsterisk
           clearable
           searchable
           withPillsReorder
@@ -138,7 +137,7 @@ export default function WorkoutSelector() {
         />
       </div>
 
-      <div className={s.btn}>
+      <div className={s.controls}>
         <Button
           mb="md"
           onClick={handleAddWorkout}
@@ -153,8 +152,9 @@ export default function WorkoutSelector() {
           checked={locked}
           style={{ marginBottom: "16px" }}
           onChange={(event) => setLock(event.currentTarget.checked)}
-          onLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)"/>}
-          offLabel={<LockIcon size={20} color="var(--mantine-color-red-4)" />}
+          offLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)"/>}
+          onLabel={<LockIcon size={20} color="var(--mantine-color-red-4)" />}
+          label={locked ? (lang === 'en' ? "Locked " : "Bloqueado") : lang === 'en' ? "Unlocked" : "Desbloqueado" }
         />
       </div>
 

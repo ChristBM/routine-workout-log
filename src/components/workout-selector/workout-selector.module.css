@@ -8,18 +8,19 @@
 }
 
 .selectorBox {
-  max-width: 60dvw;
+  max-width: 100dvw;
+  padding-inline: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 
 }
 
-.btn {
+.controls {
   width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 20px;
 }
