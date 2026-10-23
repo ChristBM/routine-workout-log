@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useS } from 'use-s-react'
 import { useDisclosure } from '@mantine/hooks'
-import { WatchIcon } from '@phosphor-icons/react';
 import { Table, Checkbox, type TableData, Button, Group, Collapse, useMantineTheme, ScrollArea } from '@mantine/core'
 import { GripTranslation, MuscleGroupTranslation, type Grip, type MuscleGroup } from '@/functions/training'
 import { store } from '@/store'
@@ -13,7 +12,7 @@ const columns = {
 }
 
 export default function ExerciseTable() {
-  const {theme, lang, expanded, workouts, toggle, getData, handleStart } = useExerciseTable()
+  const { theme, lang, expanded, workouts, toggle, getData } = useExerciseTable()
 
   return (
     <div className={s.tabContainer}>
@@ -54,12 +53,6 @@ export default function ExerciseTable() {
 
       <Group justify="center" gap="xl">
         <Button onClick={toggle}>{lang === 'en'? 'Show/Hide Table' : 'Ver/Ocultar Tabla' }</Button>
-        <Button
-          onClick={handleStart}
-          variant="outline"
-          leftSection={<WatchIcon size={25} />}
-          color="red"
-        >{lang === 'en'? 'Start' : 'Iniciar' }</Button>
       </Group>
     </div>
   )
@@ -70,7 +63,6 @@ function useExerciseTable() {
   const [lang] = useS(store.globalLang)
   const [training] = useS(store.globalTraining)
   const [{ workouts } ] = useS(store.globalTodaysWorkout)
-  const [{ startTime }, setTime] = useS(store.globalToday)
   const [{ selected }, setSelected] = useS(store.globalSelectedExercises)
 
   const [expanded, { toggle }] = useDisclosure(true)
@@ -132,18 +124,6 @@ function useExerciseTable() {
     }
   }
 
-  const handleStart = () => {
-    if (startTime === "") {
-      const now = new Date().toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit",
-        hour12: true,
-      }).toLowerCase()
-
-      setTime({ startTime: now })
-    }
-  }
-
   useEffect(() => {
     if (selected.length === 0) setSelected({ showActionBar: false })
     else setSelected({ showActionBar: true })
@@ -157,6 +137,5 @@ function useExerciseTable() {
     selected,
     toggle,
     getData,
-    handleStart
   }
 }
