@@ -1,4 +1,4 @@
-import { calcRM } from "./rm";
+import { calcRM } from "./rm"
 
 export type Grip = 'pronated' | 'supinated' | 'neutral'
 
@@ -21,7 +21,7 @@ export interface TrainingSet extends PartialTrainingSet {
 }
 
 export type MuscleGroup = "chest" | "back" | "shoulders" | "traps" | "neck" | "forearms"
-| "biceps" | "triceps" | "abs" | "obliques" | "lowerBack" | "calves" | "thighs" | "glutes"
+| "biceps" | "triceps" | "abs" | "obliques" | "lowerBack" | "calves" | "tibialis" | "thighs" | "glutes"
 | "running" | "stair" | "rowing" | "boxing" | "cycling" | "swimming"
 
 export const MuscleGroupTranslation: Record<MuscleGroup, string> = {
@@ -37,6 +37,7 @@ export const MuscleGroupTranslation: Record<MuscleGroup, string> = {
   obliques: 'oblicuos',
   lowerBack: 'lumbar',
   calves: 'pantorrillas',
+  tibialis: 'tibial',
   thighs: 'muslos',
   glutes: 'glúteos',
   running: 'correr',
@@ -364,7 +365,7 @@ export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
 
 export const UPDATES: Record<MuscleGroup, PartialTrainingSet[]> = {
   chest: [], back: [], shoulders: [], traps: [], neck: [], forearms: [],
-  biceps: [], triceps: [], abs: [], obliques: [], lowerBack: [], calves: [],
+  biceps: [], triceps: [], abs: [], obliques: [], lowerBack: [], calves: [], tibialis: [],
   thighs: [], glutes: [], running: [], stair: [], rowing: [], boxing: [], cycling:[], swimming: []
 }
 

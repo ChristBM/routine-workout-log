@@ -91,6 +91,10 @@ export default function Routine() {
       </ActionBar>
 
       <div className={s.stepper}>
+        {data.length === 0 ? (
+          lang === 'en' ? "Select the exercises from the table above ↑" : "Selecciona los ejercicios en la tabla anterior ↑"
+        ) : null}
+
         <Stepper
           radius="lg"
           active={active}

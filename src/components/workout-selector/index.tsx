@@ -45,6 +45,7 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       group: "Tren Inferior",
       items: [
         { value: "calves", label: "Pantorrillas" },
+        { value: "tibialis", label: "Tibial" },
         { value: "thighs", label: "Muslos" },
         { value: "glutes", label: "Glúteos" }
       ]
@@ -87,6 +88,7 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       group: "Lower Body",
       items: [
         { value: "calves", label: "Calves" },
+        { value: "tibialis", label: "Tibialis" },
         { value: "thighs", label: "Thighs" },
         { value: "glutes", label: "Glutes" }
       ]

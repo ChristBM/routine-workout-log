@@ -37,6 +37,7 @@ export default function ExerciseTable() {
               key={g}
               style={{ marginBlockEnd: "20px"}}
               borderColor={theme.colors.neonGreen[9]}
+              verticalSpacing="md"
               styles={{
                 td: {
                   maxWidth: "max-content",
