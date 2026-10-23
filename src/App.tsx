@@ -1,11 +1,11 @@
 import { Divider, Image } from '@mantine/core'
 import { BarbellIcon, PersonIcon, StepsIcon, TableIcon } from '@phosphor-icons/react'
+import Routine from '@/components/routine'
 import WeekDay from '@/components/week-day'
+import BodyMap from './components/body-map'
 import LangSwitch from '@/components/lang-switch'
 import ExerciseTable from '@/components/exercise-table'
 import WorkoutSelector from '@/components/workout-selector'
-import BodyMap from './components/body-map'
-import Routine from '@/components/routine'
 
 import s from './app.module.css'
 
