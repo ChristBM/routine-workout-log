@@ -193,7 +193,7 @@ function useRoutine() {
   const theme = useMantineTheme()
   const [lang] = useS(store.globalLang)
   const [training] = useS(store.globalTraining)
-  const [_, setTime] = useS(store.globalToday)
+  const [{ startTime }, setTime] = useS(store.globalToday)
   const [{ workouts }, setWorkouts] = useS(store.globalTodaysWorkout)
   const [trainingUpdates, setTrainingUpdates] = useS(store.globalTrainingUpdates)
   const [{ selected, setType, rest, showActionBar }, setSelected] = useS(store.globalSelectedExercises)
@@ -205,6 +205,16 @@ function useRoutine() {
   const interval = useInterval(() => setSeconds((s) => s - 1), 1000)
 
   const nextStep = () => {
+    if (startTime === "") {
+      const now = new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }).toLowerCase()
+
+      setTime((prev) => ({ ...prev, startTime: now }))
+    }
+
     const times = data.map(d => d.nextRest)
     setSeconds(times[active])
     setLocalState({ isWorking: true })

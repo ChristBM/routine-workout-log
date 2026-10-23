@@ -70,7 +70,7 @@ function useExerciseTable() {
   const [lang] = useS(store.globalLang)
   const [training] = useS(store.globalTraining)
   const [{ workouts } ] = useS(store.globalTodaysWorkout)
-  const [_, setTime] = useS(store.globalToday)
+  const [{ startTime }, setTime] = useS(store.globalToday)
   const [{ selected }, setSelected] = useS(store.globalSelectedExercises)
 
   const [expanded, { toggle }] = useDisclosure(true)
@@ -133,13 +133,15 @@ function useExerciseTable() {
   }
 
   const handleStart = () => {
-    const now = new Date().toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    }).toLowerCase()
+    if (startTime === "") {
+      const now = new Date().toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+      }).toLowerCase()
 
-    setTime({ startTime: now })
+      setTime({ startTime: now })
+    }
   }
 
   useEffect(() => {
