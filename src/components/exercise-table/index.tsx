@@ -18,7 +18,7 @@ export default function ExerciseTable() {
     <div className={s.tabContainer}>
       <ScrollArea
         scrollbars="x"
-        offsetScrollbars
+        // offsetScrollbars
       >
         <Collapse
           expanded={expanded}
@@ -52,7 +52,11 @@ export default function ExerciseTable() {
       </ScrollArea>
 
       <Group justify="center" gap="xl">
-        <Button onClick={toggle}>{lang === 'en'? 'Show/Hide Table' : 'Ver/Ocultar Tabla' }</Button>
+        {workouts.length ? (
+          <Button onClick={toggle}>{lang === 'en'? 'Show/Hide Table' : 'Ver/Ocultar Tabla' }</Button>
+        ): (
+          lang === 'en' ? "Select the muscle groups you want to work on ↑" : "Selecciona los grupos musculares que quieres trabajar ↑"
+        )}
       </Group>
     </div>
   )
