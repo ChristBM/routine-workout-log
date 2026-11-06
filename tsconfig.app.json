@@ -24,6 +24,8 @@
      "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/functions/*": ["./src/functions/*"],
       "@/store/*": ["./src/store/*"],
     }
   },

@@ -1,102 +1,91 @@
-import type { SetType } from "@/functions/rm";
-import { INITIAL_UPDATES, TRAINING, type MuscleGroup, type PartialTrainingSet, type TrainingSet } from "@/functions/training";
+import type { SetType, TimeOfRestBetweenSets } from '@/functions/rm';
+import { INITIAL_UPDATES, TRAINING, type MuscleGroup } from '@/functions/training';
+import type { TrainingStats, TrainingSet } from '@/functions/workouts';
 
-export type Lang = 'es' | 'en'
+export type Lang = 'es' | 'en';
 
-export type RestTimeApprox = 1 | 60 | 90 | 120
-export type RestTimeEffect = 1 | 120 | 180 | 240
-
-export const ApproxArr: RestTimeApprox[] = [1, 60, 90, 120]
-export const EffectArr: RestTimeEffect[] = [1, 120, 180, 240]
+export type RestTime = 'auto' & TimeOfRestBetweenSets; // ver esto
 
 export type StoreType = {
   globalLang: {
-    value: Lang
-    readonly key: 'global-lang'
-    persist?: boolean
-  }
+    value: Lang;
+    readonly key: 'global-lang';
+    persist?: boolean;
+  };
   globalToday: {
     value: {
-      today: Date
-      startTime: string
-    }
-    readonly key: 'global-today'
-  }
+      today: Date;
+      startTime: string;
+    };
+    readonly key: 'global-today';
+  };
   globalTodaysWorkout: {
     value: {
-      day: string
-      workouts: MuscleGroup[]
-    }
-    readonly key: "global-todays-workout"
-    persist?: boolean
-  }
+      day: string;
+      workouts: MuscleGroup[];
+    };
+    readonly key: 'global-todays-workout';
+    persist?: boolean;
+  };
   globalSelectedExercises: {
     value: {
-      selected: string[]
-      setType: SetType
-      showActionBar: boolean
-      rest: {
-        approx: RestTimeApprox
-        effect: RestTimeEffect
-      }
-    }
-    readonly key: 'global-selected-exercises'
-    persist?: boolean
-  }
+      selected: string[];
+      setType: SetType;
+      showActionBar: boolean;
+    };
+    readonly key: 'global-selected-exercises';
+    persist?: boolean;
+  };
   globalTraining: {
-    value: Partial<Record<MuscleGroup, TrainingSet[]>>
-    readonly key: "global-training"
-    persist?: boolean
-  }
+    value: Partial<Record<MuscleGroup, TrainingSet[]>>;
+    readonly key: 'global-training';
+    persist?: boolean;
+  };
   globalTrainingUpdates: {
-    value: Partial<Record<MuscleGroup, PartialTrainingSet[]>>
-    readonly key: "global-training-updates"
-    persist?: boolean
-  }
+    value: Partial<Record<MuscleGroup, TrainingStats[]>>;
+    readonly key: 'global-training-updates';
+    persist?: boolean;
+  };
 };
 
 export const store: StoreType = {
   globalLang: {
     value: 'es',
     key: 'global-lang',
-    persist: true
+    persist: true,
   },
   globalToday: {
     value: {
       today: new Date(),
-      startTime: ""
+      startTime: '',
     },
-    key: 'global-today'
+    key: 'global-today',
   },
   globalTodaysWorkout: {
     value: {
-      day: "",
-      workouts: []
+      day: '',
+      workouts: [],
     },
-    key: "global-todays-workout",
-    persist: true
+    key: 'global-todays-workout',
+    persist: true,
   },
   globalSelectedExercises: {
     value: {
       selected: [],
       setType: 'hypertrophy',
       showActionBar: false,
-      rest: {
-        approx: 1,
-        effect: 1
-      }
     },
     key: 'global-selected-exercises',
-    persist: true
+    persist: true,
   },
   globalTraining: {
     value: TRAINING,
     key: 'global-training',
-    persist: false
+    persist: false,
   },
   globalTrainingUpdates: {
     value: INITIAL_UPDATES,
-    key: "global-training-updates",
-    persist: true
-  }
+    key: 'global-training-updates',
+    persist: true,
+  },
 } as const;

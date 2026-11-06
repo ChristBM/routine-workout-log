@@ -1,138 +1,166 @@
 import { useEffect } from 'react';
-import { useS } from 'use-s-react';
-import { Button, Group, MultiSelect, Select, Switch } from '@mantine/core';
 import { BarbellIcon, LockIcon, LockOpenIcon, PlusIcon } from '@phosphor-icons/react';
-import type { MuscleGroup } from '@/functions/training';
+import { useS } from 'use-s-react';
+import { Button, Group, MultiSelect, Switch } from '@mantine/core';
 import type { SetType } from '@/functions/rm';
-import { ApproxArr, EffectArr, store, type Lang } from '@/store';
-
-import s from "./workout-selector.module.css"
+import type { MuscleGroup } from '@/functions/training';
+import { store, type Lang } from '@/store';
+import s from './workout-selector.module.css';
 
 interface WorkoutItem {
-  value: MuscleGroup
-  label: string
+  value: MuscleGroup;
+  label: string;
 }
 
 interface Workout {
-  group: string
-  items: WorkoutItem[]
+  group: string;
+  items: WorkoutItem[];
 }
 
 export const WORKOUT: Record<Lang, Workout[]> = {
   es: [
     {
-      group: "Tren Superior",
-      items: [
-        { value: "chest", label: "Pecho" },
-        { value: "back", label: "Espalda" },
-        { value: "shoulders", label: "Hombros" },
-        { value: "traps", label: "Trapecio" },
-        { value: "neck", label: "Cuello" },
-        { value: "forearms", label: "Antebrazos" },
-        { value: "biceps", label: "Bíceps" },
-        { value: "triceps", label: "Tríceps" }
-      ]
+      group: 'Rutinas Automatizadas',
+      items: [{ value: 'PERFECT', label: 'Rutina PERFECTA [5 días]' }],
     },
     {
-      group: "Core",
+      group: 'Cuerpo Completo',
       items: [
-        { value: "abs", label: "Abdominales" },
-        { value: "obliques", label: "Oblicuos" },
-        { value: "lowerBack", label: "Lumbar" },
-      ]
+        { value: 'R1', label: 'Pecho-Tríceps-Cuádriceps-Aductores' },
+        { value: 'R2', label: 'Espalda-Bíceps-Isquiotibiales-Pantorrillas' },
+        { value: 'R3', label: 'Hombros-Trapecios-Glúteos-Antebrazos' },
+      ],
     },
     {
-      group: "Tren Inferior",
+      group: 'Tren Superior',
       items: [
-        { value: "calves", label: "Pantorrillas" },
-        { value: "tibialis", label: "Tibial" },
-        { value: "thighs", label: "Muslos" },
-        { value: "glutes", label: "Glúteos" }
-      ]
+        // { value: "neck", label: "Cuello" },
+        { value: 'traps', label: 'Trapecio' },
+        { value: 'shoulders', label: 'Hombros' },
+        { value: 'chest', label: 'Pecho' },
+        { value: 'back', label: 'Espalda' },
+        { value: 'triceps', label: 'Tríceps' },
+        { value: 'biceps', label: 'Bíceps' },
+        { value: 'forearms', label: 'Antebrazos' },
+      ],
     },
+    // {
+    //   group: "Core",
+    //   items: [
+    //     { value: "abs", label: "Abdominales" },
+    //     { value: "obliques", label: "Oblicuos" },
+    //     { value: "lowerBack", label: "Lumbar" },
+    //   ]
+    // },
     {
-      group: "Cardio",
+      group: 'Tren Inferior',
       items: [
-        { value: "running", label: "Correr (Tren Inferior + Core)" },
-        { value: "stair", label: "Escaleras (Tren Inferior + Core)" },
-        { value: "rowing", label: "Remo (Tren Inferior + Espalda-Brazos + Core)" },
-        { value: "boxing", label: "Boxeo (Tren Inferior + Hombros-Brazos + Core)" },
-        { value: "cycling", label: "Bicicleta (Tren Inferior)" },
-        { value: "swimming", label: "Natación (Todo el Cuerpo)" }
-      ]
+        { value: 'glutes', label: 'Glúteos' },
+        { value: 'quadriceps', label: 'Cuádriceps' },
+        { value: 'hipAdductor', label: 'Aductores' },
+        { value: 'hamstrings', label: 'Isquios' },
+        { value: 'calves', label: 'Pantorrillas' },
+        { value: 'thighs', label: 'Muslos (Completo)' },
+      ],
     },
+    // {
+    //   group: "Cardio",
+    //   items: [
+    //     { value: "running", label: "Correr (Tren Inferior + Core)" },
+    //     { value: "stair", label: "Escaleras (Tren Inferior + Core)" },
+    //     { value: "rowing", label: "Remo (Tren Inferior + Espalda-Brazos + Core)" },
+    //     { value: "boxing", label: "Boxeo (Tren Inferior + Hombros-Brazos + Core)" },
+    //     { value: "cycling", label: "Bicicleta (Tren Inferior)" },
+    //     { value: "swimming", label: "Natación (Todo el Cuerpo)" }
+    //   ]
+    // },
   ],
   en: [
     {
-      group: "Upper Body",
-      items: [
-        { value: "chest", label: "Chest" },
-        { value: "back", label: "Back" },
-        { value: "shoulders", label: "Shoulders" },
-        { value: "traps", label: "Traps" },
-        { value: "neck", label: "Neck" },
-        { value: "forearms", label: "Forearms" },
-        { value: "biceps", label: "Biceps" },
-        { value: "triceps", label: "Triceps" }
-      ]
+      group: 'Automated Routines',
+      items: [{ value: 'PERFECT', label: 'PERFECT Routine [5 days]' }],
     },
     {
-      group: "Core",
+      group: 'Full Body',
       items: [
-        { value: "abs", label: "Abs" },
-        { value: "obliques", label: "Obliques" },
-        { value: "lowerBack", label: "Lower Back" }
-      ]
+        { value: 'R1', label: 'Chest-Triceps-Quadriceps-HipAdductor' },
+        { value: 'R2', label: 'Back-Biceps-Hamstrings-Calves' },
+        { value: 'R3', label: 'Shoulders-Traps-Glutes-Forearms' },
+      ],
     },
     {
-      group: "Lower Body",
+      group: 'Upper Body',
       items: [
-        { value: "calves", label: "Calves" },
-        { value: "tibialis", label: "Tibialis" },
-        { value: "thighs", label: "Thighs" },
-        { value: "glutes", label: "Glutes" }
-      ]
+        // { value: "neck", label: "Neck" },
+        { value: 'traps', label: 'Traps' },
+        { value: 'shoulders', label: 'Shoulders' },
+        { value: 'chest', label: 'Chest' },
+        { value: 'back', label: 'Back' },
+        { value: 'triceps', label: 'Triceps' },
+        { value: 'biceps', label: 'Biceps' },
+        { value: 'forearms', label: 'Forearms' },
+      ],
     },
+    // {
+    //   group: "Core",
+    //   items: [
+    //     { value: "abs", label: "Abs" },
+    //     { value: "obliques", label: "Obliques" },
+    //     { value: "lowerBack", label: "Lower Back" }
+    //   ]
+    // },
     {
-      group: "Cardio",
+      group: 'Lower Body',
       items: [
-        { value: "running", label: "Running (Lower Body + Core)" },
-        { value: "stair", label: "Stair Climber (Lower Body + Core)" },
-        { value: "rowing", label: "Rowing (Lower Body + Back-Arms + Core)" },
-        { value: "boxing", label: "Boxing (Lower Body + Shoulders-Arms + Core)" },
-        { value: "cycling", label: "Cycling (Lower Body)" },
-        { value: "swimming", label: "Swimming (Full Body)" }
-      ]
-    }
-  ]
-}
+        { value: 'glutes', label: 'Glutes' },
+        { value: 'quadriceps', label: 'Quadriceps' },
+        { value: 'hipAdductor', label: 'Adductors' },
+        { value: 'hamstrings', label: 'Hamstrings' },
+        { value: 'calves', label: 'Calves' },
+        { value: 'thighs', label: 'Thighs (Full)' },
+      ],
+    },
+    // {
+    //   group: "Cardio",
+    //   items: [
+    //     { value: "running", label: "Running (Lower Body + Core)" },
+    //     { value: "stair", label: "Stair Climber (Lower Body + Core)" },
+    //     { value: "rowing", label: "Rowing (Lower Body + Back-Arms + Core)" },
+    //     { value: "boxing", label: "Boxing (Lower Body + Shoulders-Arms + Core)" },
+    //     { value: "cycling", label: "Cycling (Lower Body)" },
+    //     { value: "swimming", label: "Swimming (Full Body)" }
+    //   ]
+    // }
+  ],
+};
 
 const MULTI_SELECT = {
-  es: ["¿Qué tipo de entrenamiento quieres hacer hoy?", "Seleccionar o buscar", "No encontrado..."],
-  en: ["What kind of workout do you want to do today?", "Select or search", "Nothing found..."]
-}
+  es: ['¿Qué tipo de entrenamiento quieres hacer hoy?', 'Seleccionar o buscar', 'No encontrado...'],
+  en: ['What kind of workout do you want to do today?', 'Select or search', 'Nothing found...'],
+};
 
 const setTypeTranslation: Record<Lang, Record<SetType, string>> = {
   en: {
-    strength: "Strength",
-    hypertrophy: "Hypertrophy"
+    strength: 'Strength',
+    hypertrophy: 'Hypertrophy',
   },
   es: {
-    strength: "Fuerza",
-    hypertrophy: "Hipertrofia"
-  }
-}
+    strength: 'Fuerza',
+    hypertrophy: 'Hipertrofia',
+  },
+};
 
 const icon = <BarbellIcon size={20} />;
 
 export default function WorkoutSelector() {
-  const { lang, locked, value, rest, setType, setValue, setLock, setSelected, handleAddWorkout } = useWorkoutSelector()
+  const { lang, locked, value, setType, setValue, setLock, setSelected, handleAddWorkout } =
+    useWorkoutSelector();
 
   return (
     <div className={s.selectorContainer}>
       <div className={s.selectorBox}>
         <MultiSelect
-          label={<p style={{fontSize: "15px"}}>{MULTI_SELECT[lang][0]}</p>}
+          label={<p style={{ fontSize: '15px' }}>{MULTI_SELECT[lang][0]}</p>}
           placeholder={MULTI_SELECT[lang][1]}
           data={WORKOUT[lang]}
           nothingFoundMessage={MULTI_SELECT[lang][2]}
@@ -152,37 +180,13 @@ export default function WorkoutSelector() {
         />
       </div>
 
-      <Group justify="center">
-        <Select
-          w={350}
-          data={ApproxArr}
-          value={rest.approx}
-          defaultValue={rest.approx}
-          label={lang === 'en' ? "Approximation [in seconds]" : "Aproximación [en segundos]"}
-          description={lang === 'en' ? "Change the rest time between approach sets" : "Cambia el tiempo de descanso entre series de aproximación"}
-          onChange={(val) => setSelected({ rest: { approx: val ?? 1 } })}
-        />
-      </Group>
-
-      <Group justify="center">
-        <Select
-          w={350}
-          data={EffectArr}
-          value={rest.effect}
-          defaultValue={rest.effect}
-          label={lang === 'en' ? "Effective [in seconds]" : "Effectiva [en segundos]"}
-          description={lang === 'en' ? "Change the rest time between effective sets" : "Cambia el tiempo de descanso entre series efectivas"}
-          onChange={(val) => setSelected({ rest: { effect: val ?? 1 } })}
-        />
-      </Group>
-
       <Group justify="center" gap="md">
         <Button
           leftSection={<PlusIcon size={20} />}
           onClick={handleAddWorkout}
           disabled={locked || value.length === 0}
         >
-          {lang === "es" ? "Agregar": "Add"}
+          {lang === 'es' ? 'Agregar' : 'Add'}
         </Button>
 
         <Switch
@@ -191,9 +195,13 @@ export default function WorkoutSelector() {
           defaultChecked
           disabled={locked || value.length === 0}
           checked={setType === 'hypertrophy'}
-          onChange={(event) => setSelected({setType: event.currentTarget.checked ? 'hypertrophy' : 'strength'})}
-          offLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['strength']}</p>}
-          onLabel={<p style={{ paddingInline: "10px"}}>{setTypeTranslation[lang]['hypertrophy']}</p>}
+          onChange={(event) =>
+            setSelected({ setType: event.currentTarget.checked ? 'hypertrophy' : 'strength' })
+          }
+          offLabel={<p style={{ paddingInline: '10px' }}>{setTypeTranslation[lang]['strength']}</p>}
+          onLabel={
+            <p style={{ paddingInline: '10px' }}>{setTypeTranslation[lang]['hypertrophy']}</p>
+          }
         />
 
         <Switch
@@ -201,47 +209,46 @@ export default function WorkoutSelector() {
           color="dark.4"
           checked={locked}
           onChange={(event) => setLock(event.currentTarget.checked)}
-          offLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)"/>}
+          offLabel={<LockOpenIcon size={20} color="var(--mantine-color-green-6)" />}
           onLabel={<LockIcon size={20} color="var(--mantine-color-red-4)" />}
         />
       </Group>
     </div>
-  )
+  );
 }
 
 function useWorkoutSelector() {
-  const [value, setValue] = useS<MuscleGroup[]>([])
-  const [locked, setLock] = useS(false)
-  const [lang] = useS(store.globalLang)
-  const [{ today }] = useS(store.globalToday)
-  const [{ day, workouts }, setTodaysWorkout ] = useS(store.globalTodaysWorkout)
-  const [{ rest, setType }, setSelected ] = useS(store.globalSelectedExercises)
+  const [value, setValue] = useS<MuscleGroup[]>([]);
+  const [locked, setLock] = useS(false);
+  const [lang] = useS(store.globalLang);
+  const [{ today }] = useS(store.globalToday);
+  const [{ day, workouts }, setTodaysWorkout] = useS(store.globalTodaysWorkout);
+  const [{ setType }, setSelected] = useS(store.globalSelectedExercises);
 
   const handleAddWorkout = () => {
-    setTodaysWorkout({ workouts: value })
-    setSelected({ selected: [] })
-    setLock(true)
-  }
+    setTodaysWorkout({ workouts: value });
+    setSelected({ selected: [] });
+    setLock(true);
+  };
 
   useEffect(() => {
     if (day === today.toLocaleDateString()) {
-      setValue(workouts)
-      setLock(workouts.length === 0 ? false :true)
+      setValue(workouts);
+      setLock(workouts.length > 0);
     } else {
-      setTodaysWorkout({ day: today.toLocaleDateString(), workouts: [] })
-      setLock(false)
+      setTodaysWorkout({ day: today.toLocaleDateString(), workouts: [] });
+      setLock(false);
     }
-  }, [])
+  }, []);
 
   return {
     lang,
     locked,
     value,
-    rest,
     setType,
     setValue,
     setLock,
     setSelected,
-    handleAddWorkout
-  }
+    handleAddWorkout,
+  };
 }

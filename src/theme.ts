@@ -1,5 +1,4 @@
-import { createTheme } from '@mantine/core';
-import type { MantineColorsTuple } from '@mantine/core';
+import { createTheme, type MantineColorsTuple } from '@mantine/core';
 
 const neonGreen: MantineColorsTuple = [
   '#ecfff3',

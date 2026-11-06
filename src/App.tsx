@@ -1,26 +1,25 @@
-import { Divider, Image } from '@mantine/core'
-import { BarbellIcon, PersonIcon, StepsIcon, TableIcon } from '@phosphor-icons/react'
-import Routine from '@/components/routine'
-import WeekDay from '@/components/week-day'
-import BodyMap from './components/body-map'
-import LangSwitch from '@/components/lang-switch'
-import ExerciseTable from '@/components/exercise-table'
-import WorkoutSelector from '@/components/workout-selector'
-
-import s from './app.module.css'
+import { BarbellIcon, PersonIcon, StepsIcon, TableIcon } from '@phosphor-icons/react';
+import { Divider, Image } from '@mantine/core';
+import BodyMap from '@/components/body-map';
+import ExerciseTable from '@/components/exercise-table';
+import LangSwitch from '@/components/lang-switch';
+import Routine from '@/components/routine';
+import WeekDay from '@/components/week-day';
+import WorkoutSelector from '@/components/workout-selector';
+import useUpdateTraining from '@/hooks/use-update-training';
+import useHandleSetTypeWhenPerfect from './hooks/use-handle-set-type-when-perfect';
+import s from './app.module.css';
 
 export default function App() {
+  useUpdateTraining();
+  useHandleSetTypeWhenPerfect();
+
   return (
     <div className={s.app}>
       <header className={s.header}>
         <WeekDay />
 
-        <Image
-          h={50}
-          w="auto"
-          fit="contain"
-          src="/favicon.png"
-        />
+        <Image h={50} w="auto" fit="contain" src="/favicon.png" />
 
         <LangSwitch />
       </header>
@@ -81,5 +80,5 @@ export default function App() {
         }
       />
     </div>
-  )
+  );
 }

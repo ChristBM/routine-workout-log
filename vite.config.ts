@@ -1,10 +1,32 @@
+import path from 'node:path';
 import babel from '@rolldown/plugin-babel';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import path from 'node:path';
 
 export default defineConfig({
+   build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: 'react-vendor',
+              test: /node_modules\/(react|react-dom|scheduler)\//,
+            },
+            {
+              name: 'mantine',
+              test: /node_modules\/@mantine\//,
+            },
+            {
+              name: 'vendor',
+              test: /node_modules\//,
+            },
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
@@ -31,11 +53,11 @@ export default defineConfig({
           },
         ],
       },
-    })
+    }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(import.meta.dirname, './src'),
     },
   },
 });
