@@ -362,7 +362,7 @@ export const FOREARMS: TrainingSet[] = [
     },
     description:
       'Importante rotar la muñeca cuando el peso esté arriba, hacer el recorrido en el tramo medio a superior (135 grados). Sentir el trabajo en el antebrazo.',
-    icon: '/public/icons/reverse-barbell-curl-icon-64.png',
+    icon: '/icons/reverse-barbell-curl-icon-64.png',
   },
   {
     uuid: 'forearms-2',
