@@ -1,6 +1,6 @@
+import { INITIAL_UPDATES, TRAINING, type MuscleGroup } from '@/constants/training';
+import type { TrainingStats, TrainingSet } from '@/constants/workouts';
 import type { SetType, TimeOfRestBetweenSets } from '@/functions/rm';
-import { INITIAL_UPDATES, TRAINING, type MuscleGroup } from '@/functions/training';
-import type { TrainingStats, TrainingSet } from '@/functions/workouts';
 
 export type Lang = 'es' | 'en';
 

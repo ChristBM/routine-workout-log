@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { BarbellIcon, LockIcon, LockOpenIcon, PlusIcon } from '@phosphor-icons/react';
 import { useS } from 'use-s-react';
 import { Button, Group, MultiSelect, Switch } from '@mantine/core';
+import type { MuscleGroup } from '@/constants/training';
 import type { SetType } from '@/functions/rm';
-import type { MuscleGroup } from '@/functions/training';
 import { store, type Lang } from '@/store';
 import s from './workout-selector.module.css';
 
@@ -21,7 +21,10 @@ export const WORKOUT: Record<Lang, Workout[]> = {
   es: [
     {
       group: 'Rutinas Automatizadas',
-      items: [{ value: 'PERFECT', label: 'Rutina PERFECTA [5 días]' }],
+      items: [
+        { value: 'MAN', label: 'Rutina HOMBRE [5 días]' },
+        { value: 'WOMAN', label: 'Rutina MUJER [5 días]' },
+      ],
     },
     {
       group: 'Cuerpo Completo',
@@ -44,14 +47,14 @@ export const WORKOUT: Record<Lang, Workout[]> = {
         { value: 'forearms', label: 'Antebrazos' },
       ],
     },
-    // {
-    //   group: "Core",
-    //   items: [
-    //     { value: "abs", label: "Abdominales" },
-    //     { value: "obliques", label: "Oblicuos" },
-    //     { value: "lowerBack", label: "Lumbar" },
-    //   ]
-    // },
+    {
+      group: 'Core',
+      items: [
+        { value: 'abs', label: 'Abdominales' },
+        // { value: "obliques", label: "Oblicuos" },
+        // { value: "lowerBack", label: "Lumbar" },
+      ],
+    },
     {
       group: 'Tren Inferior',
       items: [
@@ -78,7 +81,10 @@ export const WORKOUT: Record<Lang, Workout[]> = {
   en: [
     {
       group: 'Automated Routines',
-      items: [{ value: 'PERFECT', label: 'PERFECT Routine [5 days]' }],
+      items: [
+        { value: 'MAN', label: 'MAN Routine [5 days]' },
+        { value: 'WOMAN', label: 'WOMAN Routine [5 days]' },
+      ],
     },
     {
       group: 'Full Body',
@@ -101,14 +107,14 @@ export const WORKOUT: Record<Lang, Workout[]> = {
         { value: 'forearms', label: 'Forearms' },
       ],
     },
-    // {
-    //   group: "Core",
-    //   items: [
-    //     { value: "abs", label: "Abs" },
-    //     { value: "obliques", label: "Obliques" },
-    //     { value: "lowerBack", label: "Lower Back" }
-    //   ]
-    // },
+    {
+      group: 'Core',
+      items: [
+        { value: 'abs', label: 'Abs' },
+        // { value: "obliques", label: "Obliques" },
+        // { value: "lowerBack", label: "Lower Back" }
+      ],
+    },
     {
       group: 'Lower Body',
       items: [

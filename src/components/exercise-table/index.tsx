@@ -12,8 +12,8 @@ import {
   Image,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { GripTranslation, MuscleGroupTranslation, type MuscleGroup } from '@/functions/training';
-import type { Grip } from '@/functions/workouts';
+import { GripTranslation, MuscleGroupTranslation, type MuscleGroup } from '@/constants/training';
+import type { Grip } from '@/constants/workouts';
 import { store } from '@/store';
 import s from './exercise-table.module.css';
 

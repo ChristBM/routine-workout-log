@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useS } from 'use-s-react';
-import type { MuscleGroup } from '@/functions/training';
-import type { TrainingSet, TrainingStats } from '@/functions/workouts';
+import type { MuscleGroup } from '@/constants/training';
+import type { TrainingSet, TrainingStats } from '@/constants/workouts';
 import { store } from '@/store';
 
 export default function useUpdateTraining() {

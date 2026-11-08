@@ -1,4 +1,4 @@
-import type { SetsApprox } from './workouts';
+import type { SetsApprox } from '@/constants/workouts';
 
 export type SetType = 'strength' | 'hypertrophy';
 export type AllowedReps = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;

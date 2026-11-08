@@ -2,8 +2,9 @@ import { useRef, useEffect } from 'react';
 import { BodyChart, ViewSide, type BodyPartState, MUSCLE_GROUPS } from 'body-muscles';
 import { useS } from 'use-s-react';
 import { Grid, Text } from '@mantine/core';
-import { PERFECT_ROUTINE, type WeekDay } from '@/functions/perfect-routine';
-import type { MuscleGroup } from '@/functions/training';
+import { MAN_ROUTINE, type WeekDay } from '@/constants/man-routine';
+import type { MuscleGroup } from '@/constants/training';
+import { WOMAN_ROUTINE } from '@/constants/woman-routine';
 import { store } from '@/store';
 
 export type GraphMuscleGroup =
@@ -67,11 +68,17 @@ export default function BodyMap() {
     if (workouts.length) {
       const newWorkouts = workouts
         .map((w) => {
-          if (w === 'PERFECT') {
+          if (w === 'MAN') {
             const dayName = new Date()
               .toLocaleDateString('en-US', { weekday: 'long' })
               .toLowerCase();
-            return PERFECT_ROUTINE[dayName as WeekDay]?.body ?? [];
+            return MAN_ROUTINE[dayName as WeekDay]?.body ?? [];
+          }
+          if (w === 'WOMAN') {
+            const dayName = new Date()
+              .toLocaleDateString('en-US', { weekday: 'long' })
+              .toLowerCase();
+            return WOMAN_ROUTINE[dayName as WeekDay]?.body ?? [];
           }
           if (w === 'R1') {
             return ['chest', 'triceps', 'quadriceps', 'hipAdductor'];
@@ -123,7 +130,7 @@ export default function BodyMap() {
               return m.includes('forearm');
             }
             if (w === 'abs') {
-              return m.includes('abs');
+              return m.includes('abs') || m.includes('obliques');
             }
             if (w === 'obliques') {
               return m.includes('obliques');

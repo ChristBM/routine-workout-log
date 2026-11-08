@@ -14,8 +14,8 @@ import {
   Space,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import type { TrainingSet, UUIDAllowed } from '@/constants/workouts';
 import { calcApprox, calcRM, type AllowedReps } from '@/functions/rm';
-import type { TrainingSet, UUIDAllowed } from '@/functions/workouts';
 import { store } from '@/store';
 import s from './routine.module.css';
 
@@ -289,7 +289,7 @@ function useRoutine() {
   }, [times, seconds]);
 
   useEffect(() => {
-    if (data.length === 0 || (data.length && selected.length && workouts.length)) {
+    if (selected.length >= 1 && workouts.length >= 1) {
       const flattedTraining = workouts
         .map((w) => {
           if (training[w]) {

@@ -6,8 +6,8 @@ import LangSwitch from '@/components/lang-switch';
 import Routine from '@/components/routine';
 import WeekDay from '@/components/week-day';
 import WorkoutSelector from '@/components/workout-selector';
+import useHandleSetTypeWhenPerfect from '@/hooks/use-handle-set-type-when-perfect';
 import useUpdateTraining from '@/hooks/use-update-training';
-import useHandleSetTypeWhenPerfect from './hooks/use-handle-set-type-when-perfect';
 import s from './app.module.css';
 
 export default function App() {

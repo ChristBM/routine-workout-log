@@ -1,4 +1,4 @@
-import { calcRM, trainingAdvice, type TrainingAdvice } from './rm';
+import { calcRM, trainingAdvice, type TrainingAdvice } from '@/functions/rm';
 
 export type Grip = 'pronated' | 'supinated' | 'neutral';
 export type SetsApprox = 1 | 2;
@@ -23,8 +23,10 @@ export type UUIDAllowed =
   | 'forearms-2'
   | 'forearms-3'
   | 'forearms-4'
+  | 'abs-1'
   | 'glutes-1'
   | 'glutes-2'
+  | 'glutes-3'
   | 'quadriceps-1'
   | 'quadriceps-2'
   | 'hipAdductor-1'
@@ -82,9 +84,12 @@ const RM_FOREARMS_1 = calcRM({ weight: 50, maxReps: 8 });
 const RM_FOREARMS_2 = calcRM({ weight: 30, maxReps: 8 });
 const RM_FOREARMS_3 = calcRM({ weight: 15, maxReps: 8 });
 const RM_FOREARMS_4 = calcRM({ weight: 30, maxReps: 8 });
+//1RM ABS
+const RM_ABS_1 = calcRM({ weight: 50, maxReps: 8 });
 //1RM GLUTES
 const RM_GLUTES_1 = calcRM({ weight: 320, maxReps: 8 });
 const RM_GLUTES_2 = calcRM({ weight: 120, maxReps: 8 });
+const RM_GLUTES_3 = calcRM({ weight: 100, maxReps: 8 });
 //1RM QUADRICEPS
 const RM_QUADRICEPS_1 = calcRM({ weight: 160, maxReps: 6 });
 const RM_QUADRICEPS_2 = calcRM({ weight: 70, maxReps: 8 });
@@ -110,7 +115,7 @@ export const TRAPS: TrainingSet[] = [
     },
     description:
       'Manos rectas en todo el movimiento, encoger los hombros hacia arriba, aguantar 1 segundo y bajar. Sentir el trabajo en el trapecio superior.',
-    icon: '/icons/barbell-shrug-icon-64.png',
+    icon: '/icons/hex-bar-shrug-icon-64.png',
   },
   {
     uuid: 'traps-2',
@@ -410,6 +415,26 @@ export const FOREARMS: TrainingSet[] = [
   },
 ];
 
+export const ABS: TrainingSet[] = [
+  {
+    uuid: 'abs-1',
+    name: 'Abdominal con polea o máquina [abs]',
+    rm: RM_ABS_1,
+    effective: {
+      strength: trainingAdvice({ rm: RM_ABS_1, setType: 'strength', rest: 150, sets: 4 }),
+      hypertrophy: trainingAdvice({
+        rm: RM_FOREARMS_1,
+        setType: 'hypertrophy',
+        rest: 120,
+        sets: 4,
+      }),
+    },
+    description:
+      'Hacer la fuerza con los abdominales y no con los brazos. Sentir el trabajo en los abdominales.',
+    icon: '/icons/cable-crunch-icon-64.png',
+  },
+];
+
 export const GLUTES: TrainingSet[] = [
   {
     uuid: 'glutes-1',
@@ -417,8 +442,8 @@ export const GLUTES: TrainingSet[] = [
     rm: RM_GLUTES_1,
     approximation: 1,
     effective: {
-      strength: trainingAdvice({ rm: RM_GLUTES_1, setType: 'strength', rest: 120, sets: 3 }),
-      hypertrophy: trainingAdvice({ rm: RM_GLUTES_1, setType: 'hypertrophy', rest: 120, sets: 3 }),
+      strength: trainingAdvice({ rm: RM_GLUTES_1, setType: 'strength', rest: 120, sets: 2 }),
+      hypertrophy: trainingAdvice({ rm: RM_GLUTES_1, setType: 'hypertrophy', rest: 120, sets: 2 }),
     },
     description:
       'Revisa las instrucciones de la máquina para el ajuste. Mantener arrriba 1-2 segundos y contraer el glúteo en la subida. Sentir el trabajo en el glúteo.',
@@ -429,12 +454,24 @@ export const GLUTES: TrainingSet[] = [
     name: 'Hip Abductor en máquina [glúteo medio-menor]',
     rm: RM_GLUTES_2,
     effective: {
-      strength: trainingAdvice({ rm: RM_GLUTES_2, setType: 'strength', rest: 90, sets: 3 }),
-      hypertrophy: trainingAdvice({ rm: RM_GLUTES_2, setType: 'hypertrophy', rest: 90, sets: 3 }),
+      strength: trainingAdvice({ rm: RM_GLUTES_2, setType: 'strength', rest: 90, sets: 2 }),
+      hypertrophy: trainingAdvice({ rm: RM_GLUTES_2, setType: 'hypertrophy', rest: 90, sets: 2 }),
     },
     description:
       'Ejecutar el movimiento inclinado hacia el frente (torzo a 30 grados), agarrado de la máquina. Sentir el trabajo en la parte superior del glúteo.',
     icon: '/icons/hip-abduction-icon-64.png',
+  },
+  {
+    uuid: 'glutes-3',
+    name: 'Asalto en máquina Smith [glúteo]',
+    rm: RM_GLUTES_3,
+    effective: {
+      strength: trainingAdvice({ rm: RM_GLUTES_3, setType: 'strength', rest: 180, sets: 2 }),
+      hypertrophy: trainingAdvice({ rm: RM_GLUTES_3, setType: 'hypertrophy', rest: 180, sets: 2 }),
+    },
+    description:
+      'Usar una plataforma para poner el pies delantero y que el asalto tenga más profundidad. Sentir el trabajo en la parte superior del glúteo.',
+    icon: '/icons/barbell-reverse-lunge-icon-64.png',
   },
 ];
 

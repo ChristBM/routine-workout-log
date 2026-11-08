@@ -1,4 +1,6 @@
-import { perfectRoutine } from './perfect-routine';
+import { MAN_ROUTINE } from '@/constants/man-routine';
+import { WOMAN_ROUTINE } from '@/constants/woman-routine';
+import { perfectRoutine } from '@/functions/perfect-routine';
 import {
   BACK,
   BICEPS,
@@ -15,10 +17,12 @@ import {
   type Grip,
   type TrainingStats,
   type TrainingSet,
+  ABS,
 } from './workouts';
 
 export type MuscleGroup =
-  | 'PERFECT'
+  | 'MAN'
+  | 'WOMAN'
   | 'R1'
   | 'R2'
   | 'R3'
@@ -48,7 +52,8 @@ export type MuscleGroup =
   | 'swimming';
 
 export const MuscleGroupTranslation: Record<MuscleGroup, string> = {
-  PERFECT: 'PERFECTA',
+  MAN: 'HOMBRE',
+  WOMAN: 'MUJER',
   R1: 'R1',
   R2: 'R2',
   R3: 'R3',
@@ -85,7 +90,8 @@ export const GripTranslation: Record<Grip, string> = {
 };
 
 export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
-  PERFECT: perfectRoutine(),
+  MAN: perfectRoutine({ routine: MAN_ROUTINE }),
+  WOMAN: perfectRoutine({ routine: WOMAN_ROUTINE }),
   R1: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
   R2: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
   R3: [...SHOULDERS, ...TRAPS, ...GLUTES, ...FOREARMS],
@@ -96,6 +102,7 @@ export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
   triceps: TRICEPS,
   biceps: BICEPS,
   forearms: FOREARMS,
+  abs: ABS,
   glutes: GLUTES,
   quadriceps: QUADRICEPS,
   hipAdductor: HIPADDUCTOR,
@@ -105,7 +112,8 @@ export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
 };
 
 export const UPDATES: Record<MuscleGroup, TrainingStats[]> = {
-  PERFECT: [],
+  MAN: [],
+  WOMAN: [],
   R1: [],
   R2: [],
   R3: [],
