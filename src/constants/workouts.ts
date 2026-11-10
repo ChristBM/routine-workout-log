@@ -66,7 +66,7 @@ const RM_SHOULDERS_1 = calcRM({ weight: 200, maxReps: 4 });
 const RM_SHOULDERS_2 = calcRM({ weight: 22, maxReps: 6 });
 const RM_SHOULDERS_3 = calcRM({ weight: 16.5, maxReps: 6 });
 //1RM CHEST
-const RM_CHEST_1 = calcRM({ weight: 270, maxReps: 8 });
+const RM_CHEST_1 = calcRM({ weight: 290, maxReps: 6 });
 const RM_CHEST_2 = calcRM({ weight: 55, maxReps: 10 });
 const RM_CHEST_3 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
 //1RM BACK
@@ -91,10 +91,10 @@ const RM_GLUTES_1 = calcRM({ weight: 320, maxReps: 8 });
 const RM_GLUTES_2 = calcRM({ weight: 120, maxReps: 8 });
 const RM_GLUTES_3 = calcRM({ weight: 100, maxReps: 8 });
 //1RM QUADRICEPS
-const RM_QUADRICEPS_1 = calcRM({ weight: 160, maxReps: 6 });
-const RM_QUADRICEPS_2 = calcRM({ weight: 70, maxReps: 8 });
+const RM_QUADRICEPS_1 = calcRM({ weight: 160, maxReps: 8 });
+const RM_QUADRICEPS_2 = calcRM({ weight: 90, maxReps: 10 });
 //1RM HIPADDUCTOR
-const RM_HIPADDUCTOR_1 = calcRM({ weight: 180, maxReps: 8 });
+const RM_HIPADDUCTOR_1 = calcRM({ weight: 200, maxReps: 6 });
 //1RM HAMSTRINGS
 const RM_HAMSTRINGS_1 = calcRM({ weight: 140, maxReps: 4 });
 const RM_HAMSTRINGS_2 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
@@ -236,7 +236,7 @@ export const CHEST: TrainingSet[] = [
     name: 'Paralelas/Fondos [pecho medio-inferior]',
     grip: 'neutral',
     rm: RM_CHEST_3,
-    naturalReps: 23,
+    naturalReps: 25,
     effective: {
       strength: trainingAdvice({ rm: RM_CHEST_3, setType: 'strength', rest: 210, sets: 2 }),
       hypertrophy: trainingAdvice({ rm: RM_CHEST_3, setType: 'hypertrophy', rest: 180, sets: 2 }),
@@ -311,8 +311,8 @@ export const TRICEPS: TrainingSet[] = [
     grip: 'neutral',
     rm: RM_TRICEPS_2,
     effective: {
-      strength: trainingAdvice({ rm: RM_TRICEPS_1, setType: 'strength', rest: 120, sets: 3 }),
-      hypertrophy: trainingAdvice({ rm: RM_TRICEPS_1, setType: 'hypertrophy', rest: 120, sets: 3 }),
+      strength: trainingAdvice({ rm: RM_TRICEPS_2, setType: 'strength', rest: 120, sets: 3 }),
+      hypertrophy: trainingAdvice({ rm: RM_TRICEPS_2, setType: 'hypertrophy', rest: 120, sets: 3 }),
     },
     description:
       'Cuerpo recto, alar hasta que el codo esté extendido, el codo no se mueve y extensión completa abajo-arriba. Sentir el trabajo en el triceps-largo.',
@@ -341,8 +341,8 @@ export const BICEPS: TrainingSet[] = [
     grip: 'supinated',
     rm: RM_BICEPS_2,
     effective: {
-      strength: trainingAdvice({ rm: RM_BICEPS_1, setType: 'strength', rest: 150, sets: 3 }),
-      hypertrophy: trainingAdvice({ rm: RM_BICEPS_1, setType: 'hypertrophy', rest: 150, sets: 3 }),
+      strength: trainingAdvice({ rm: RM_BICEPS_2, setType: 'strength', rest: 150, sets: 3 }),
+      hypertrophy: trainingAdvice({ rm: RM_BICEPS_2, setType: 'hypertrophy', rest: 150, sets: 3 }),
     },
     description:
       'Buscar extensión completa y técnica de ejecución, movimiento medio lento. Sentir el trabajo en el bíceps.',
