@@ -29,9 +29,12 @@ export const WORKOUT: Record<Lang, Workout[]> = {
     {
       group: 'Cuerpo Completo',
       items: [
-        { value: 'R1', label: 'Pecho-Tríceps-Cuádriceps-Aductores' },
-        { value: 'R2', label: 'Espalda-Bíceps-Isquiotibiales-Pantorrillas' },
-        { value: 'R3', label: 'Hombros-Trapecios-Glúteos-Antebrazos' },
+        { value: 'M1', label: 'M1: Pecho-Tríceps-Cuádriceps-Aductores' },
+        { value: 'M2', label: 'M2: Espalda-Bíceps-Isquiotibiales-Pantorrillas' },
+        { value: 'M3', label: 'M3: Hombros-Trapecios-Glúteos-Antebrazos' },
+        { value: 'W1', label: 'W1: Glúteos-Isquiotibiales-Pantorrillas-Espalda-Tríceps' },
+        { value: 'W2', label: 'W2: Cuádriceps-Aductores-ABS-Pecho-Bíceps' },
+        { value: 'W3', label: 'W3: Hombros-Trapecios-Antebrazos' },
       ],
     },
     {
@@ -89,9 +92,12 @@ export const WORKOUT: Record<Lang, Workout[]> = {
     {
       group: 'Full Body',
       items: [
-        { value: 'R1', label: 'Chest-Triceps-Quadriceps-HipAdductor' },
-        { value: 'R2', label: 'Back-Biceps-Hamstrings-Calves' },
-        { value: 'R3', label: 'Shoulders-Traps-Glutes-Forearms' },
+        { value: 'M1', label: 'M1: Chest-Triceps-Quadriceps-HipAdductor' },
+        { value: 'M2', label: 'M1: Back-Biceps-Hamstrings-Calves' },
+        { value: 'M3', label: 'M1: Shoulders-Traps-Glutes-Forearms' },
+        { value: 'W1', label: 'W1: Glutes-Hamstrings-Calves-Back-Triceps' },
+        { value: 'W2', label: 'W2: Quadriceps-HipAdductor-ABS-Chest-Biceps' },
+        { value: 'W3', label: 'W3: Shoulders-Traps-Forearms' },
       ],
     },
     {

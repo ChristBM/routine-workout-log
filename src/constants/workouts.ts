@@ -70,15 +70,15 @@ const RM_CHEST_1 = calcRM({ weight: 290, maxReps: 6 });
 const RM_CHEST_2 = calcRM({ weight: 55, maxReps: 10 });
 const RM_CHEST_3 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
 //1RM BACK
-const RM_BACK_1 = calcRM({ weight: 360, maxReps: 8 });
-const RM_BACK_2 = calcRM({ weight: 209, maxReps: 8 });
-const RM_BACK_3 = calcRM({ weight: 44.5, maxReps: 8 });
+const RM_BACK_1 = calcRM({ weight: 390, maxReps: 6 });
+const RM_BACK_2 = calcRM({ weight: 214, maxReps: 8 });
+const RM_BACK_3 = calcRM({ weight: 49.5, maxReps: 8 });
 //1RM TRICEPS
 const RM_TRICEPS_1 = calcRM({ weight: 99, maxReps: 6 });
 const RM_TRICEPS_2 = calcRM({ weight: 22.5, maxReps: 7 });
 //1RM BICEPS
-const RM_BICEPS_1 = calcRM({ weight: 100, maxReps: 4 });
-const RM_BICEPS_2 = calcRM({ weight: 40, maxReps: 6 });
+const RM_BICEPS_1 = calcRM({ weight: 100, maxReps: 5 });
+const RM_BICEPS_2 = calcRM({ weight: 55, maxReps: 6 });
 //1RM FOREARMS
 const RM_FOREARMS_1 = calcRM({ weight: 50, maxReps: 8 });
 const RM_FOREARMS_2 = calcRM({ weight: 30, maxReps: 8 });
@@ -92,14 +92,14 @@ const RM_GLUTES_2 = calcRM({ weight: 120, maxReps: 8 });
 const RM_GLUTES_3 = calcRM({ weight: 100, maxReps: 8 });
 //1RM QUADRICEPS
 const RM_QUADRICEPS_1 = calcRM({ weight: 160, maxReps: 8 });
-const RM_QUADRICEPS_2 = calcRM({ weight: 90, maxReps: 10 });
+const RM_QUADRICEPS_2 = calcRM({ weight: 90, maxReps: 12, isNatural: true });
 //1RM HIPADDUCTOR
 const RM_HIPADDUCTOR_1 = calcRM({ weight: 200, maxReps: 6 });
 //1RM HAMSTRINGS
 const RM_HAMSTRINGS_1 = calcRM({ weight: 140, maxReps: 4 });
 const RM_HAMSTRINGS_2 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
 //1RM CALVES
-const RM_CALVES_1 = calcRM({ weight: 160, maxReps: 6 });
+const RM_CALVES_1 = calcRM({ weight: 170, maxReps: 4 });
 
 // Excercises
 export const TRAPS: TrainingSet[] = [
@@ -498,6 +498,7 @@ export const QUADRICEPS: TrainingSet[] = [
     uuid: 'quadriceps-2',
     name: 'Sentadilla Hack - máquina [cuádriceps]',
     rm: RM_QUADRICEPS_2,
+    naturalReps: 25,
     effective: {
       strength: trainingAdvice({ rm: RM_QUADRICEPS_2, setType: 'strength', rest: 120, sets: 3 }),
       hypertrophy: trainingAdvice({

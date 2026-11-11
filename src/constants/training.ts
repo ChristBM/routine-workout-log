@@ -14,18 +14,21 @@ import {
   SHOULDERS,
   TRAPS,
   TRICEPS,
+  ABS,
   type Grip,
   type TrainingStats,
   type TrainingSet,
-  ABS,
 } from './workouts';
 
 export type MuscleGroup =
   | 'MAN'
   | 'WOMAN'
-  | 'R1'
-  | 'R2'
-  | 'R3'
+  | 'M1'
+  | 'M2'
+  | 'M3'
+  | 'W1'
+  | 'W2'
+  | 'W3'
   | 'neck'
   | 'traps'
   | 'shoulders'
@@ -54,9 +57,12 @@ export type MuscleGroup =
 export const MuscleGroupTranslation: Record<MuscleGroup, string> = {
   MAN: 'HOMBRE',
   WOMAN: 'MUJER',
-  R1: 'R1',
-  R2: 'R2',
-  R3: 'R3',
+  M1: 'M1',
+  M2: 'M2',
+  M3: 'M3',
+  W1: 'W1',
+  W2: 'W2',
+  W3: 'W3',
   neck: 'cuello',
   traps: 'trapecios',
   shoulders: 'hombros',
@@ -92,9 +98,12 @@ export const GripTranslation: Record<Grip, string> = {
 export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
   MAN: perfectRoutine({ routine: MAN_ROUTINE }),
   WOMAN: perfectRoutine({ routine: WOMAN_ROUTINE }),
-  R1: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
-  R2: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
-  R3: [...SHOULDERS, ...TRAPS, ...GLUTES, ...FOREARMS],
+  M1: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
+  M2: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
+  M3: [...SHOULDERS, ...TRAPS, ...GLUTES, ...FOREARMS],
+  W1: [...GLUTES, ...HAMSTRINGS, ...CALVES, ...BACK, ...TRICEPS],
+  W2: [...QUADRICEPS, ...HIPADDUCTOR, ...ABS, ...CHEST, ...BICEPS],
+  W3: [...SHOULDERS, ...TRAPS, ...FOREARMS],
   traps: TRAPS,
   shoulders: SHOULDERS,
   chest: CHEST,
@@ -114,9 +123,12 @@ export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
 export const UPDATES: Record<MuscleGroup, TrainingStats[]> = {
   MAN: [],
   WOMAN: [],
-  R1: [],
-  R2: [],
-  R3: [],
+  M1: [],
+  M2: [],
+  M3: [],
+  W1: [],
+  W2: [],
+  W3: [],
   neck: [],
   traps: [],
   shoulders: [],

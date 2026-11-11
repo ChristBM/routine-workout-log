@@ -80,14 +80,23 @@ export default function BodyMap() {
               .toLowerCase();
             return WOMAN_ROUTINE[dayName as WeekDay]?.body ?? [];
           }
-          if (w === 'R1') {
+          if (w === 'M1') {
             return ['chest', 'triceps', 'quadriceps', 'hipAdductor'];
           }
-          if (w === 'R2') {
+          if (w === 'M2') {
             return ['back', 'biceps', 'hamstrings', 'calves'];
           }
-          if (w === 'R3') {
+          if (w === 'M3') {
             return ['shoulders', 'traps', 'glutes', 'forearms'];
+          }
+          if (w === 'W1') {
+            return ['glutes', 'hamstrings', 'calves', 'back', 'triceps'];
+          }
+          if (w === 'W2') {
+            return ['quadriceps', 'hipAdductor', 'abs', 'chest', 'biceps'];
+          }
+          if (w === 'W3') {
+            return ['shoulders', 'traps', 'forearms'];
           }
           // if (w === 'running') {
           //   return ['thighs'];
