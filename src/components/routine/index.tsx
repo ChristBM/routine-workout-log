@@ -186,14 +186,12 @@ type UseRoutineState = {
   data: TrainingData[];
   times: number[];
   modalData: SetImprovement;
-  active: number;
   seconds: number;
 };
 
 const initialValue: UseRoutineState = {
   times: [],
   data: [],
-  active: 0,
   seconds: 0,
   modalData: {
     id: 'back-1',
@@ -210,8 +208,9 @@ function useRoutine() {
   const [{ workouts }, setWorkouts] = useS(store.globalTodaysWorkout);
   const [trainingUpdates, setTrainingUpdates] = useS(store.globalTrainingUpdates);
   const [{ selected, setType, showActionBar }, setSelected] = useS(store.globalSelectedExercises);
+  const [active, setActive] = useS(store.globalActive);
 
-  const [{ data, times, modalData, active }, setLocalState] = useS(initialValue);
+  const [{ data, times, modalData }, setLocalState] = useS(initialValue);
   const [opened, { open, close }] = useDisclosure(false);
   const [seconds, setSeconds] = useS<number>(times[active] ?? 0);
 
@@ -228,7 +227,7 @@ function useRoutine() {
     }
 
     setSeconds(times[active]);
-    setLocalState({ active: active < data.length ? active + 1 : active });
+    setActive((prev) => (prev < data.length ? prev + 1 : prev));
   };
 
   const handleSaveImprovements = (ss: TrainingData) => {
@@ -256,7 +255,8 @@ function useRoutine() {
 
     setWorkouts({ workouts: [] });
     setSelected({ selected: [], showActionBar: false });
-    setLocalState({ data: [], active: 0 });
+    setLocalState({ data: [] });
+    setActive(0);
   };
 
   const handleSaveUpdates = () => {

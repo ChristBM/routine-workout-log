@@ -236,11 +236,13 @@ function useWorkoutSelector() {
   const [{ today }] = useS(store.globalToday);
   const [{ day, workouts }, setTodaysWorkout] = useS(store.globalTodaysWorkout);
   const [{ setType }, setSelected] = useS(store.globalSelectedExercises);
+  const [_, setActive] = useS(store.globalActive);
 
   const handleAddWorkout = () => {
     setTodaysWorkout({ workouts: value });
     setSelected({ selected: [] });
     setLock(true);
+    setActive(0);
   };
 
   useEffect(() => {

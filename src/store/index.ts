@@ -46,6 +46,11 @@ export type StoreType = {
     readonly key: 'global-training-updates';
     persist?: boolean;
   };
+  globalActive: {
+    value: number;
+    readonly key: 'global-active';
+    persist?: boolean;
+  };
 };
 
 export const store: StoreType = {
@@ -86,6 +91,11 @@ export const store: StoreType = {
   globalTrainingUpdates: {
     value: INITIAL_UPDATES,
     key: 'global-training-updates',
+    persist: true,
+  },
+  globalActive: {
+    value: 0,
+    key: 'global-active',
     persist: true,
   },
 } as const;
