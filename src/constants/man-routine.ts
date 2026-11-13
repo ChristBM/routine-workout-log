@@ -162,9 +162,9 @@ export const MAN_3DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
       triceps: [
         { uuid: 'triceps-1', sets: 2 },
         { uuid: 'triceps-2', sets: 2 },
-      ]
+      ],
     },
-    body: ['chest', 'shoulders', 'triceps' ],
+    body: ['chest', 'shoulders', 'triceps'],
     setType: 'hypertrophy',
   },
   wednesday: {
@@ -174,9 +174,7 @@ export const MAN_3DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
         { uuid: 'back-1', sets: 2 },
         { uuid: 'back-2', sets: 2 },
       ],
-      traps: [
-        { uuid: 'traps-1', sets: 2 },
-      ],
+      traps: [{ uuid: 'traps-1', sets: 2 }],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },
         { uuid: 'biceps-2', sets: 2 },
@@ -207,7 +205,7 @@ export const MAN_3DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
         { uuid: 'hamstrings-1', sets: 2 },
         { uuid: 'hamstrings-2', sets: 2 },
       ],
-      calves: [{ uuid: 'calves-1', sets: 2 }]
+      calves: [{ uuid: 'calves-1', sets: 2 }],
     },
     body: ['glutes', 'hipAdductor', 'quadriceps', 'hamstrings', 'calves'],
     setType: 'hypertrophy',
