@@ -24,6 +24,7 @@ export type TrainingAdvice = {
   times: TimeOfRestBetweenSets[];
   sets: NumberOfEffectiveSets;
   text: string;
+  drop: string;
 };
 
 const rmTable: number[] = [1, 0.95, 0.9, 0.88, 0.86, 0.83, 0.8, 0.78, 0.76, 0.75, 0.72, 0.7];
@@ -34,7 +35,7 @@ export function calcRM({ weight, maxReps, isNatural }: CalcRMArgs): number {
   }
   if (maxReps >= 1 && maxReps <= 12) {
     const percent = rmTable[maxReps - 1];
-    const rm = Math.floor(weight / percent);
+    const rm = Math.round(weight / percent / 5) * 5;
 
     return rm;
   }
@@ -42,11 +43,22 @@ export function calcRM({ weight, maxReps, isNatural }: CalcRMArgs): number {
   return weight;
 }
 
+const dropRatio = 0.3;
+
 export function trainingAdvice({ rm, setType, rest, sets }: TrainingAdviceArgs): TrainingAdvice {
   const reps = setType === 'hypertrophy' ? 8 : 5;
   const times: TimeOfRestBetweenSets[] = Array.from({ length: sets }, () => rest);
   const weight =
-    setType === 'hypertrophy' ? Math.floor(rm * rmTable[9]) : Math.floor(rm * rmTable[4]);
+    setType === 'hypertrophy'
+      ? Math.round((rm * rmTable[9]) / 5) * 5
+      : Math.round((rm * rmTable[4]) / 5) * 5;
+  const calcDrop = () => {
+    const d1 = weight;
+    const d2 = Math.round((weight * (1 - dropRatio)) / 5) * 5;
+    const d3 = Math.round((d2 * (1 - dropRatio)) / 5) * 5;
+
+    return { d1, d2, d3 };
+  };
 
   return {
     reps,
@@ -54,13 +66,14 @@ export function trainingAdvice({ rm, setType, rest, sets }: TrainingAdviceArgs):
     weight,
     sets,
     text: `${weight} LB x ${reps} reps`,
+    drop: `${calcDrop().d1} LB x 6 reps - ${calcDrop().d2} LB x 6 reps - ${calcDrop().d3} LB x 6 reps`,
   };
 }
 
 export function calcApprox({ rm, sets }: { rm: number; sets?: SetsApprox }): TrainingAdvice {
   const reps = 10;
   const times: TimeOfRestBetweenSets[] = [60];
-  const weight = Math.floor(rm * 0.5);
+  const weight = Math.round((rm * 0.5) / 5) * 5;
 
   return {
     reps,
@@ -68,6 +81,7 @@ export function calcApprox({ rm, sets }: { rm: number; sets?: SetsApprox }): Tra
     weight,
     sets: sets ?? 1,
     text: `${weight} LB x ${reps} reps`,
+    drop: '',
   };
 }
 

@@ -14,7 +14,7 @@ import {
   Space,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import type { TrainingSet, UUIDAllowed } from '@/constants/workouts';
+import type { TrainingSet, TrainingStats, UUIDAllowed } from '@/constants/workouts';
 import { calcApprox, calcRM, type AllowedReps } from '@/functions/rm';
 import { store } from '@/store';
 import s from './routine.module.css';
@@ -45,49 +45,68 @@ export default function Routine() {
         title={lang === 'en' ? 'Continuous Improvement' : 'Mejora Progresiva'}
         centered
       >
-        {lang === 'en'
-          ? 'Do you want to change the 1RM for this exercise?'
-          : '¿Quieres cambiar el 1RM de este ejercicio?'}
+        {modalData.naturalReps ? (
+          <Text>
+            {lang === 'en'
+              ? 'Do you want to change the number of repetitions using your own body weight?'
+              : '¿Quieres cambiar el número de repeticiones utilizando tu propio peso?'}
+          </Text>
+        ) : (
+          <Text>
+            {lang === 'en'
+              ? 'Do you want to change the 1RM for this exercise?'
+              : '¿Quieres cambiar el 1RM de este ejercicio?'}
+          </Text>
+        )}
 
         <Space h="sm" />
 
         <Text style={{ color: theme.colors.neonGreen[3] }}>
-          {modalData?.weight} LB x {modalData?.reps} reps
+          {modalData.naturalReps
+            ? `${modalData.naturalReps} reps`
+            : `${modalData?.weight} LB x ${modalData?.reps} reps`}
         </Text>
 
-        <Space h="lg" />
-
-        <Group justify="center">
-          <NumberInput
-            defaultValue={modalData?.weight}
-            value={modalData?.weight}
-            onChange={(value) =>
-              setLocalState((prev) => ({ ...prev, modalData: { weight: value as number } }))
-            } // setLocalState
-            step={1}
-            min={0}
-            max={1000}
-            label={lang === 'en' ? 'Update weight' : 'Actualizar peso'}
-            description={
-              lang === 'en'
-                ? 'This change will recalculate your 1RM for next session'
-                : 'El cambio recalculará tu 1RM para la próxima sesión'
-            }
-          />
-        </Group>
+        {modalData.naturalReps ? null : (
+          <>
+            <Space h="lg" />
+            <Group justify="center">
+              <NumberInput
+                defaultValue={modalData?.weight}
+                value={modalData?.weight}
+                onChange={(value) =>
+                  setLocalState((prev) => ({ ...prev, modalData: { weight: value as number } }))
+                } // setLocalState
+                step={1}
+                min={0}
+                max={1000}
+                label={lang === 'en' ? 'Update weight' : 'Actualizar peso'}
+                description={
+                  lang === 'en'
+                    ? 'This change will recalculate your 1RM for next session'
+                    : 'El cambio recalculará tu 1RM para la próxima sesión'
+                }
+              />
+            </Group>
+          </>
+        )}
 
         <Space h="xl" />
 
         <Group justify="center">
           <NumberInput
-            defaultValue={modalData?.reps}
-            value={modalData?.reps}
-            onChange={(value) =>
-              setLocalState((prev) => ({ ...prev, modalData: { reps: value as AllowedReps } }))
-            } // setLocalState
+            defaultValue={modalData.naturalReps ? modalData.naturalReps : modalData?.reps}
+            // value={modalData.naturalReps ? modalData.naturalReps : modalData?.reps}
+            onChange={(value) => {
+              if (modalData.naturalReps) {
+                setLocalState((prev) => ({ ...prev, modalData: { naturalReps: value as number } }));
+              } else {
+                setLocalState((prev) => ({ ...prev, modalData: { reps: value as AllowedReps } }));
+              }
+            }}
             step={1}
             min={1}
-            max={12}
+            max={modalData.naturalReps ? 1000 : 12}
             label={lang === 'en' ? 'Update reps' : 'Actualizar reps'}
             description={
               lang === 'en'
@@ -138,7 +157,18 @@ export default function Routine() {
                   )}
                 </div>
               }
-              description={ss.description}
+              description={
+                <div>
+                  <p>{ss.description}</p>
+                  {ss.drop ? (
+                    <Text size="sm" c="#ffffff8b">
+                      ・{lang === 'es' ? 'Descendente: ' : 'Drop: '}
+                      {ss.drop}
+                    </Text>
+                  ) : null}
+                  <Space h="lg" />
+                </div>
+              }
               loading={idx === active}
             />
           ))}
@@ -157,15 +187,18 @@ export default function Routine() {
     </div>
   );
 }
+
 interface SetImprovement {
   id: UUIDAllowed;
   reps: AllowedReps;
   weight: number;
+  naturalReps?: number;
 }
 
 type TrainingData = {
   id: UUIDAllowed;
   label: string;
+  drop?: string;
   description: string;
   nextRest: number;
   isEffective: boolean;
@@ -197,6 +230,7 @@ const initialValue: UseRoutineState = {
     id: 'back-1',
     reps: 1,
     weight: 0,
+    naturalReps: 0,
   },
 };
 
@@ -236,6 +270,7 @@ function useRoutine() {
         id: ss.id,
         reps: ss.modalData.reps,
         weight: ss.modalData.weight,
+        naturalReps: ss.modalData.naturalReps,
       },
     });
 
@@ -260,17 +295,26 @@ function useRoutine() {
   };
 
   const handleSaveUpdates = () => {
-    const newChange = {
+    let newChange: TrainingStats = {
       uuid: modalData.id,
-      rm: calcRM({ weight: modalData.weight, maxReps: modalData.reps }),
+      rm: 0,
     };
+
+    if (modalData.naturalReps) {
+      newChange = { ...newChange, naturalReps: modalData.naturalReps };
+    } else {
+      newChange = {
+        ...newChange,
+        rm: calcRM({ weight: modalData.weight, maxReps: modalData.reps }),
+      };
+    }
 
     workouts.forEach((w) => {
       const oldMarks = trainingUpdates[w] ?? [];
 
       const updated = oldMarks.map((e) => {
-        if (e.uuid === newChange.uuid && e.rm !== newChange.rm) {
-          return newChange;
+        if (e.uuid === newChange.uuid) {
+          return newChange.naturalReps ? { ...newChange, rm: e.rm } : { ...newChange };
         }
 
         return e;
@@ -319,7 +363,10 @@ function useRoutine() {
           const tstep = arr.map((ts, idx) => ({
             id: t.uuid,
             description: t.name,
-            label: `${ts === 'a' ? apprTranslation[lang] + calcApprox({ rm: t.rm }).text : effeTranslation[lang] + t.effective[setType].text}`,
+            drop: t.dropSets && ts === 'e' ? t.effective[setType].drop : undefined,
+            label: t.naturalReps
+              ? `Natural: ${t.naturalReps} reps`
+              : `${ts === 'a' ? apprTranslation[lang] + calcApprox({ rm: t.rm }).text : effeTranslation[lang] + t.effective[setType].text}`,
             nextRest: ts === 'a' ? 60 : originalTimes[0],
             isEffective:
               (ts === 'e' &&
@@ -332,6 +379,7 @@ function useRoutine() {
               reps: t.effective[setType].reps,
               weight: t.effective[setType].weight,
               unit: 'LB',
+              naturalReps: t.naturalReps,
             },
           }));
 

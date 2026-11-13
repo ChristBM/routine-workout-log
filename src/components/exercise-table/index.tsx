@@ -106,7 +106,7 @@ function useExerciseTable() {
             />
           </Group>,
           group.name,
-          `${group.rm} ` + `LB`,
+          group.naturalReps ? `${group.naturalReps} reps` : `${group.rm} ` + `LB`,
           group.approximation,
           setType === 'hypertrophy'
             ? group.effective.hypertrophy.sets

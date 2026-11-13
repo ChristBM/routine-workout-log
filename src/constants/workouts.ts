@@ -41,6 +41,7 @@ export interface SetData {
     strength: TrainingAdvice;
     hypertrophy: TrainingAdvice;
   };
+  dropSets?: boolean;
 }
 export interface TrainingInfo {
   name: string;
@@ -179,6 +180,7 @@ export const SHOULDERS: TrainingSet[] = [
         sets: 2,
       }),
     },
+    dropSets: true,
     description:
       'Ajusta el cable a la altura de la cadera. El cable pasa frente al cuerpo, movimiento pendular, brazo recto todo el tiempo. Sentir el trabajo en el deltoides lateral.',
     icon: '/icons/cable-lateral-raise-icon-64.png',
@@ -197,6 +199,7 @@ export const SHOULDERS: TrainingSet[] = [
         sets: 2,
       }),
     },
+    dropSets: true,
     description:
       'Ajusta el cable un poco por encima de los hombros, hacer un barrido horizontal con el prazo extendido y contraer al final. Sentir el trabajo en el deltoides posterior.',
     icon: '/icons/cable-reverse-fly-icon-64.png',
@@ -284,6 +287,7 @@ export const BACK: TrainingSet[] = [
       strength: trainingAdvice({ rm: RM_BACK_3, setType: 'strength', rest: 120, sets: 2 }),
       hypertrophy: trainingAdvice({ rm: RM_BACK_3, setType: 'hypertrophy', rest: 120, sets: 2 }),
     },
+    dropSets: true,
     description:
       'Un paso atrás, mano estirada en diagonal al cable, alar hasta que el codo sobrepase la linea del cuerpo. Sentir el trabajo en ese lateral.',
     icon: '/icons/one-arm-seated-cable-row-icon-64.png',
@@ -314,6 +318,7 @@ export const TRICEPS: TrainingSet[] = [
       strength: trainingAdvice({ rm: RM_TRICEPS_2, setType: 'strength', rest: 120, sets: 3 }),
       hypertrophy: trainingAdvice({ rm: RM_TRICEPS_2, setType: 'hypertrophy', rest: 120, sets: 3 }),
     },
+    dropSets: true,
     description:
       'Cuerpo recto, alar hasta que el codo esté extendido, el codo no se mueve y extensión completa abajo-arriba. Sentir el trabajo en el triceps-largo.',
     icon: '/icons/cable-overhead-tricep-extension-icon-64.png',
@@ -344,6 +349,7 @@ export const BICEPS: TrainingSet[] = [
       strength: trainingAdvice({ rm: RM_BICEPS_2, setType: 'strength', rest: 150, sets: 3 }),
       hypertrophy: trainingAdvice({ rm: RM_BICEPS_2, setType: 'hypertrophy', rest: 150, sets: 3 }),
     },
+    dropSets: true,
     description:
       'Buscar extensión completa y técnica de ejecución, movimiento medio lento. Sentir el trabajo en el bíceps.',
     icon: '/icons/one-arm-dumbbell-preacher-curl-icon-64.png',
@@ -457,6 +463,7 @@ export const GLUTES: TrainingSet[] = [
       strength: trainingAdvice({ rm: RM_GLUTES_2, setType: 'strength', rest: 90, sets: 2 }),
       hypertrophy: trainingAdvice({ rm: RM_GLUTES_2, setType: 'hypertrophy', rest: 90, sets: 2 }),
     },
+    dropSets: true,
     description:
       'Ejecutar el movimiento inclinado hacia el frente (torzo a 30 grados), agarrado de la máquina. Sentir el trabajo en la parte superior del glúteo.',
     icon: '/icons/hip-abduction-icon-64.png',
@@ -490,6 +497,7 @@ export const QUADRICEPS: TrainingSet[] = [
         sets: 3,
       }),
     },
+    dropSets: true,
     description:
       'Rretrasar el respaldo lo más posible. Subir y mantener 1 segundo la pierna estirada. Sentir el trabajo en la parte frontal del muslo.',
     icon: '/icons/leg-extension-icon-64.png',
@@ -528,6 +536,7 @@ export const HIPADDUCTOR: TrainingSet[] = [
         sets: 4,
       }),
     },
+    dropSets: true,
     description:
       'Ajustar el espaldar inclinado hacia atrás. Sentir el trabajo en la parte interna del muslo.',
     icon: '/icons/hip-adduction-icon-64.png',
@@ -549,6 +558,7 @@ export const HAMSTRINGS: TrainingSet[] = [
         sets: 3,
       }),
     },
+    dropSets: true,
     description:
       'Flexión de rodilla. Ajustar el respaldo atrás. Sentir el trabajo en la parte posterior del muslo.',
     icon: '/icons/seated-leg-curl-icon-64.png',
@@ -557,7 +567,7 @@ export const HAMSTRINGS: TrainingSet[] = [
     uuid: 'hamstrings-2',
     name: 'Hiperextensiones de espalda [isquitibiales]',
     rm: RM_HAMSTRINGS_2,
-    naturalReps: 10,
+    naturalReps: 25,
     effective: {
       strength: trainingAdvice({ rm: RM_HAMSTRINGS_2, setType: 'strength', rest: 90, sets: 3 }),
       hypertrophy: trainingAdvice({
@@ -580,14 +590,15 @@ export const CALVES: TrainingSet[] = [
     rm: RM_CALVES_1,
     approximation: 1,
     effective: {
-      strength: trainingAdvice({ rm: RM_HAMSTRINGS_1, setType: 'strength', rest: 120, sets: 4 }),
+      strength: trainingAdvice({ rm: RM_CALVES_1, setType: 'strength', rest: 120, sets: 4 }),
       hypertrophy: trainingAdvice({
-        rm: RM_HAMSTRINGS_1,
+        rm: RM_CALVES_1,
         setType: 'hypertrophy',
         rest: 120,
         sets: 4,
       }),
     },
+    dropSets: true,
     description:
       'Pierna recta - rodilla siempre extendida, bajar y aguantar 1 segundo abajo; subir y hacer lo mismo. Para la descendente bajar el peso 2 veces más con la misma cantidad de reps. Sentir el trabajo en los gemelos.',
     icon: '/icons/machine-calf-raise-icon-64.png',

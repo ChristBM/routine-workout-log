@@ -128,7 +128,7 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
       ],
       traps: [
         { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-2', sets: 2 },
+        { uuid: 'traps-3', sets: 2 },
       ],
       glutes: [
         { uuid: 'glutes-1', sets: 3 },
