@@ -24,6 +24,7 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       items: [
         { value: 'MAN', label: 'Rutina HOMBRE [5 días]' },
         { value: 'WOMAN', label: 'Rutina MUJER [5 días]' },
+        { value: 'MAN3DAYS', label: 'Rutina HOMBRE [3 días]' },
       ],
     },
     {
@@ -87,6 +88,7 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       items: [
         { value: 'MAN', label: 'MAN Routine [5 days]' },
         { value: 'WOMAN', label: 'WOMAN Routine [5 days]' },
+        { value: 'MAN3DAYS', label: 'MAN Routine [3 days]' },
       ],
     },
     {

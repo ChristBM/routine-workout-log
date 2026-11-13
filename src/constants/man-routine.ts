@@ -145,3 +145,71 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
     setType: 'hypertrophy',
   },
 };
+
+export const MAN_3DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
+  monday: {
+    workout: [...CHEST, ...SHOULDERS, ...TRICEPS],
+    adjustments: {
+      chest: [
+        { uuid: 'chest-1', sets: 2 },
+        { uuid: 'chest-2', sets: 2 },
+      ],
+      shoulders: [
+        { uuid: 'shoulders-1', sets: 2 },
+        { uuid: 'shoulders-2', sets: 2 },
+        { uuid: 'shoulders-3', sets: 2 },
+      ],
+      triceps: [
+        { uuid: 'triceps-1', sets: 2 },
+        { uuid: 'triceps-2', sets: 2 },
+      ]
+    },
+    body: ['chest', 'shoulders', 'triceps' ],
+    setType: 'hypertrophy',
+  },
+  wednesday: {
+    workout: [...BACK, ...TRAPS, ...BICEPS, ...FOREARMS],
+    adjustments: {
+      back: [
+        { uuid: 'back-1', sets: 2 },
+        { uuid: 'back-2', sets: 2 },
+      ],
+      traps: [
+        { uuid: 'traps-1', sets: 2 },
+      ],
+      biceps: [
+        { uuid: 'biceps-1', sets: 2 },
+        { uuid: 'biceps-2', sets: 2 },
+      ],
+      forearms: [
+        { uuid: 'forearms-1', sets: 1 },
+        { uuid: 'forearms-2', sets: 1 },
+        { uuid: 'forearms-3', sets: 1 },
+        { uuid: 'forearms-4', sets: 1 },
+      ],
+    },
+    body: ['back', 'traps', 'biceps', 'forearms'],
+    setType: 'hypertrophy',
+  },
+  friday: {
+    workout: [...GLUTES, ...HIPADDUCTOR, ...QUADRICEPS, ...HAMSTRINGS, ...CALVES],
+    adjustments: {
+      glutes: [
+        { uuid: 'glutes-1', sets: 2 },
+        { uuid: 'glutes-2', sets: 2 },
+      ],
+      hipAdductor: [{ uuid: 'hipAdductor-1', sets: 2 }],
+      quadriceps: [
+        { uuid: 'quadriceps-1', sets: 2 },
+        { uuid: 'quadriceps-2', sets: 2 },
+      ],
+      hamstrings: [
+        { uuid: 'hamstrings-1', sets: 2 },
+        { uuid: 'hamstrings-2', sets: 2 },
+      ],
+      calves: [{ uuid: 'calves-1', sets: 2 }]
+    },
+    body: ['glutes', 'hipAdductor', 'quadriceps', 'hamstrings', 'calves'],
+    setType: 'hypertrophy',
+  },
+};

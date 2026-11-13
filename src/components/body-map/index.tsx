@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { BodyChart, ViewSide, type BodyPartState, MUSCLE_GROUPS } from 'body-muscles';
 import { useS } from 'use-s-react';
 import { Grid, Text } from '@mantine/core';
-import { MAN_ROUTINE, type WeekDay } from '@/constants/man-routine';
+import { MAN_3DAYS, MAN_ROUTINE, type WeekDay } from '@/constants/man-routine';
 import type { MuscleGroup } from '@/constants/training';
 import { WOMAN_ROUTINE } from '@/constants/woman-routine';
 import { store } from '@/store';
@@ -79,6 +79,12 @@ export default function BodyMap() {
               .toLocaleDateString('en-US', { weekday: 'long' })
               .toLowerCase();
             return WOMAN_ROUTINE[dayName as WeekDay]?.body ?? [];
+          }
+          if (w === 'MAN3DAYS') {
+            const dayName = new Date()
+              .toLocaleDateString('en-US', { weekday: 'long' })
+              .toLowerCase();
+            return MAN_3DAYS[dayName as WeekDay]?.body ?? [];
           }
           if (w === 'M1') {
             return ['chest', 'triceps', 'quadriceps', 'hipAdductor'];

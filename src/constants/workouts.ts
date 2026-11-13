@@ -506,7 +506,6 @@ export const QUADRICEPS: TrainingSet[] = [
     uuid: 'quadriceps-2',
     name: 'Sentadilla Hack - máquina [cuádriceps]',
     rm: RM_QUADRICEPS_2,
-    naturalReps: 25,
     effective: {
       strength: trainingAdvice({ rm: RM_QUADRICEPS_2, setType: 'strength', rest: 120, sets: 3 }),
       hypertrophy: trainingAdvice({
@@ -525,7 +524,7 @@ export const QUADRICEPS: TrainingSet[] = [
 export const HIPADDUCTOR: TrainingSet[] = [
   {
     uuid: 'hipAdductor-1',
-    name: 'Aductorres en máquina [aductores]',
+    name: 'Aductores en máquina [aductores]',
     rm: RM_HIPADDUCTOR_1,
     effective: {
       strength: trainingAdvice({ rm: RM_HIPADDUCTOR_1, setType: 'strength', rest: 90, sets: 4 }),
