@@ -12,14 +12,35 @@ import {
   Image,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import { getStrenghtLevel } from '@/constants/strenght-level';
 import { GripTranslation, MuscleGroupTranslation, type MuscleGroup } from '@/constants/training';
 import type { Grip } from '@/constants/workouts';
 import { store } from '@/store';
 import s from './exercise-table.module.css';
 
 const columns = {
-  en: ['Order', 'Image', 'Name', '1RM', 'Approximation', 'Effective', 'Grip', 'Description'],
-  es: ['Orden', 'Imagen', 'Nombre', '1RM', 'Aproximación', 'Efectivas', 'Agarre', 'Descripción'],
+  en: [
+    'Order',
+    'Image',
+    'Name',
+    '1RM',
+    'Level',
+    'Approximation',
+    'Effective',
+    'Grip',
+    'Description',
+  ],
+  es: [
+    'Orden',
+    'Imagen',
+    'Nombre',
+    '1RM',
+    'Nivel',
+    'Aproximación',
+    'Efectivas',
+    'Agarre',
+    'Descripción',
+  ],
 };
 
 export default function ExerciseTable() {
@@ -107,11 +128,12 @@ function useExerciseTable() {
           </Group>,
           group.name,
           group.naturalReps ? `${group.naturalReps} reps` : `${group.rm} ` + `LB`,
-          group.approximation,
+          getStrenghtLevel({ uuid: group.uuid, rm: group.rm, lang }),
+          group.approximation || '・',
           setType === 'hypertrophy'
             ? group.effective.hypertrophy.sets
             : group.effective.strength.sets,
-          lang === 'en' && group.grip ? group.grip : GripTranslation[group.grip as Grip],
+          lang === 'en' && group.grip ? group.grip : GripTranslation[group.grip as Grip] || '・',
           group.description,
         ];
 

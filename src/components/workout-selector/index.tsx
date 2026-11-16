@@ -23,8 +23,9 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       group: 'Rutinas Automatizadas',
       items: [
         { value: 'MAN', label: 'Rutina HOMBRE [5 días]' },
-        { value: 'WOMAN', label: 'Rutina MUJER [5 días]' },
+        { value: 'MAN4DAYS', label: 'Rutina HOMBRE [4 días]' },
         { value: 'MAN3DAYS', label: 'Rutina HOMBRE [3 días]' },
+        { value: 'WOMAN', label: 'Rutina MUJER [5 días]' },
       ],
     },
     {
@@ -87,8 +88,9 @@ export const WORKOUT: Record<Lang, Workout[]> = {
       group: 'Automated Routines',
       items: [
         { value: 'MAN', label: 'MAN Routine [5 days]' },
-        { value: 'WOMAN', label: 'WOMAN Routine [5 days]' },
+        { value: 'MAN4DAYS', label: 'MAN Routine [4 days]' },
         { value: 'MAN3DAYS', label: 'MAN Routine [3 days]' },
+        { value: 'WOMAN', label: 'WOMAN Routine [5 days]' },
       ],
     },
     {
