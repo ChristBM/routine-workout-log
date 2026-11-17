@@ -1,4 +1,9 @@
-import { MAN_3DAYS, MAN_4DAYS, MAN_ROUTINE } from '@/constants/man-routine';
+import {
+  MAN_3DAYS,
+  MAN_4DAYS,
+  MAN_4DAYS_WEDNESDAY_OFF,
+  MAN_ROUTINE,
+} from '@/constants/man-routine';
 import { WOMAN_ROUTINE } from '@/constants/woman-routine';
 import { perfectRoutine } from '@/functions/perfect-routine';
 import {
@@ -25,6 +30,7 @@ export type MuscleGroup =
   | 'WOMAN'
   | 'MAN3DAYS'
   | 'MAN4DAYS'
+  | 'MAN4DAYSWEDNESDAYOFF'
   | 'M1'
   | 'M2'
   | 'M3'
@@ -57,10 +63,11 @@ export type MuscleGroup =
   | 'swimming';
 
 export const MuscleGroupTranslation: Record<MuscleGroup, string> = {
-  MAN: 'HOMBRE',
   WOMAN: 'MUJER',
-  MAN3DAYS: 'MAN-3-DIAS',
-  MAN4DAYS: 'MAN-4-DIAS',
+  MAN: '5-DIAS',
+  MAN4DAYS: '4-DIAS Viernes-Off',
+  MAN4DAYSWEDNESDAYOFF: '4-DIAS Miercoles-Off',
+  MAN3DAYS: '3-DIAS',
   M1: 'M1',
   M2: 'M2',
   M3: 'M3',
@@ -103,6 +110,7 @@ export const TRAINING: Partial<Record<MuscleGroup, TrainingSet[]>> = {
   MAN: perfectRoutine({ routine: MAN_ROUTINE }),
   WOMAN: perfectRoutine({ routine: WOMAN_ROUTINE }),
   MAN3DAYS: perfectRoutine({ routine: MAN_3DAYS }),
+  MAN4DAYSWEDNESDAYOFF: perfectRoutine({ routine: MAN_4DAYS_WEDNESDAY_OFF }),
   MAN4DAYS: perfectRoutine({ routine: MAN_4DAYS }),
   M1: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
   M2: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
@@ -131,6 +139,7 @@ export const UPDATES: Record<MuscleGroup, TrainingStats[]> = {
   WOMAN: [],
   MAN3DAYS: [],
   MAN4DAYS: [],
+  MAN4DAYSWEDNESDAYOFF: [],
   M1: [],
   M2: [],
   M3: [],

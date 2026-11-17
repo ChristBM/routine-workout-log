@@ -20,13 +20,17 @@ interface Workout {
 export const WORKOUT: Record<Lang, Workout[]> = {
   es: [
     {
-      group: 'Rutinas Automatizadas',
+      group: '[Hombre] Rutinas Automatizadas',
       items: [
-        { value: 'MAN', label: 'Rutina HOMBRE [5 días]' },
-        { value: 'MAN4DAYS', label: 'Rutina HOMBRE [4 días]' },
-        { value: 'MAN3DAYS', label: 'Rutina HOMBRE [3 días]' },
-        { value: 'WOMAN', label: 'Rutina MUJER [5 días]' },
+        { value: 'MAN', label: 'Rutina 5 días [L-M-Mi-J-V]' },
+        { value: 'MAN4DAYS', label: 'Rutina 4 días [L-M-Mi-J]' },
+        { value: 'MAN4DAYSWEDNESDAYOFF', label: 'Rutina 4 días [L-M-J-V]' },
+        { value: 'MAN3DAYS', label: 'Rutina 3 días [L-Mi-V]' },
       ],
+    },
+    {
+      group: '[Mujer] Rutinas Automatizadas',
+      items: [{ value: 'WOMAN', label: 'Rutina 5 días [L-M-Mi-J-V]' }],
     },
     {
       group: 'Cuerpo Completo',
@@ -85,13 +89,17 @@ export const WORKOUT: Record<Lang, Workout[]> = {
   ],
   en: [
     {
-      group: 'Automated Routines',
+      group: '[Man] Automated Routines',
       items: [
-        { value: 'MAN', label: 'MAN Routine [5 days]' },
-        { value: 'MAN4DAYS', label: 'MAN Routine [4 days]' },
-        { value: 'MAN3DAYS', label: 'MAN Routine [3 days]' },
-        { value: 'WOMAN', label: 'WOMAN Routine [5 days]' },
+        { value: 'MAN', label: 'Routine 5 days [M-T-W-Th-F]' },
+        { value: 'MAN4DAYS', label: 'Routine 4 days [M-T-W-Th]' },
+        { value: 'MAN4DAYSWEDNESDAYOFF', label: 'Routine 4 days [M-T-Th-F]' },
+        { value: 'MAN3DAYS', label: 'Routine 3 days [M-W-F]' },
       ],
+    },
+    {
+      group: '[Woman] Automated Routines',
+      items: [{ value: 'WOMAN', label: 'Routine [5 days]' }],
     },
     {
       group: 'Full Body',

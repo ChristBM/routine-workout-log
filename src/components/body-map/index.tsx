@@ -86,6 +86,12 @@ export default function BodyMap() {
               .toLowerCase();
             return MAN_4DAYS[dayName as WeekDay]?.body ?? [];
           }
+          if (w === 'MAN4DAYSWEDNESDAYOFF') {
+            const dayName = new Date()
+              .toLocaleDateString('en-US', { weekday: 'long' })
+              .toLowerCase();
+            return MAN_4DAYS[dayName as WeekDay]?.body ?? [];
+          }
           if (w === 'MAN3DAYS') {
             const dayName = new Date()
               .toLocaleDateString('en-US', { weekday: 'long' })

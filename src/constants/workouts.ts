@@ -70,7 +70,7 @@ export const RM_SHOULDERS_1 = calcRM({ weight: 200, maxReps: 4 });
 const RM_SHOULDERS_2 = calcRM({ weight: 22, maxReps: 6 });
 const RM_SHOULDERS_3 = calcRM({ weight: 16.5, maxReps: 6 });
 //1RM CHEST
-export const RM_CHEST_1 = calcRM({ weight: 290, maxReps: 6 });
+export const RM_CHEST_1 = calcRM({ weight: 300, maxReps: 6 });
 const RM_CHEST_2 = calcRM({ weight: 55, maxReps: 10 });
 const RM_CHEST_3 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
 //1RM BACK
@@ -95,10 +95,10 @@ export const RM_GLUTES_1 = calcRM({ weight: 360, maxReps: 6 });
 const RM_GLUTES_2 = calcRM({ weight: 120, maxReps: 8 });
 const RM_GLUTES_3 = calcRM({ weight: 100, maxReps: 8 });
 //1RM QUADRICEPS
-export const RM_QUADRICEPS_1 = calcRM({ weight: 160, maxReps: 8 });
+export const RM_QUADRICEPS_1 = calcRM({ weight: 200, maxReps: 8 });
 const RM_QUADRICEPS_2 = calcRM({ weight: 90, maxReps: 12, isNatural: true });
 //1RM HIPADDUCTOR
-export const RM_HIPADDUCTOR_1 = calcRM({ weight: 200, maxReps: 6 });
+export const RM_HIPADDUCTOR_1 = calcRM({ weight: 200, maxReps: 8 });
 //1RM HAMSTRINGS
 export const RM_HAMSTRINGS_1 = calcRM({ weight: 140, maxReps: 4 });
 const RM_HAMSTRINGS_2 = calcRM({ weight: 190, maxReps: 12, isNatural: true });
