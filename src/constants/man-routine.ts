@@ -1,5 +1,6 @@
 import type { MuscleGroup } from '@/constants/training';
 import {
+  ABS,
   BACK,
   BICEPS,
   CALVES,
@@ -35,7 +36,7 @@ export interface PerfectRoutine {
 
 export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
   monday: {
-    workout: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
+    workout: [...CHEST, ...TRICEPS, ...FOREARMS, ...QUADRICEPS, ...HIPADDUCTOR],
     adjustments: {
       chest: [
         { uuid: 'chest-1', sets: 2 },
@@ -46,22 +47,29 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
         { uuid: 'triceps-1', sets: 2 },
         { uuid: 'triceps-2', sets: 2 },
       ],
+      forearms: [
+        { uuid: 'forearms-3', sets: 2 },
+        { uuid: 'forearms-4', sets: 1 },
+      ],
       quadriceps: [
         { uuid: 'quadriceps-1', sets: 2 },
         { uuid: 'quadriceps-2', sets: 2 },
       ],
       hipAdductor: [{ uuid: 'hipAdductor-1', sets: 3 }],
     },
-    body: ['chest', 'triceps', 'quadriceps', 'hipAdductor'],
+    body: ['chest', 'triceps', 'forearms', 'quadriceps', 'hipAdductor'],
     setType: 'strength',
   },
   tuesday: {
-    workout: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
+    workout: [...BACK, ...TRAPS, ...BICEPS, ...HAMSTRINGS, ...CALVES],
     adjustments: {
       back: [
         { uuid: 'back-1', sets: 2 },
-        { uuid: 'back-2', sets: 1 },
-        { uuid: 'back-3', sets: 1 },
+        { uuid: 'back-2', sets: 2 },
+      ],
+      traps: [
+        { uuid: 'traps-1', sets: 2 },
+        { uuid: 'traps-3', sets: 1 },
       ],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },
@@ -73,17 +81,18 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
       ],
       calves: [{ uuid: 'calves-1', sets: 3 }],
     },
-    body: ['back', 'biceps', 'hamstrings', 'calves'],
+    body: ['back', 'traps', 'biceps', 'hamstrings', 'calves'],
     setType: 'strength',
   },
   wednesday: {
-    workout: [...CHEST, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
+    workout: [...CHEST, ...SHOULDERS, ...TRICEPS, ...QUADRICEPS, ...HIPADDUCTOR],
     adjustments: {
       chest: [
         { uuid: 'chest-1', sets: 2 },
         { uuid: 'chest-2', sets: 1 },
         { uuid: 'chest-3', sets: 1 },
       ],
+      shoulders: [{ uuid: 'shoulders-2', sets: 3 }],
       triceps: [
         { uuid: 'triceps-1', sets: 2 },
         { uuid: 'triceps-2', sets: 2 },
@@ -94,11 +103,11 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
       ],
       hipAdductor: [{ uuid: 'hipAdductor-1', sets: 3 }],
     },
-    body: ['chest', 'triceps', 'quadriceps', 'hipAdductor'],
+    body: ['chest', 'shoulders', 'triceps', 'quadriceps', 'hipAdductor'],
     setType: 'hypertrophy',
   },
   thursday: {
-    workout: [...BACK, ...BICEPS, ...HAMSTRINGS, ...CALVES],
+    workout: [...BACK, ...BICEPS, ...FOREARMS, ...HAMSTRINGS, ...CALVES],
     adjustments: {
       back: [
         { uuid: 'back-1', sets: 2 },
@@ -109,40 +118,35 @@ export const MAN_ROUTINE: Partial<Record<WeekDay, PerfectRoutine>> = {
         { uuid: 'biceps-1', sets: 2 },
         { uuid: 'biceps-2', sets: 2 },
       ],
+      forearms: [
+        { uuid: 'forearms-1', sets: 2 },
+        { uuid: 'forearms-2', sets: 1 },
+      ],
       hamstrings: [
         { uuid: 'hamstrings-1', sets: 2 },
         { uuid: 'hamstrings-2', sets: 2 },
       ],
       calves: [{ uuid: 'calves-1', sets: 3 }],
     },
-    body: ['back', 'biceps', 'hamstrings', 'calves'],
+    body: ['back', 'biceps', 'forearms', 'hamstrings', 'calves'],
     setType: 'hypertrophy',
   },
   friday: {
-    workout: [...SHOULDERS, ...TRAPS, ...GLUTES, ...FOREARMS],
+    workout: [...SHOULDERS, ...TRAPS, ...GLUTES, ...ABS],
     adjustments: {
       shoulders: [
         { uuid: 'shoulders-1', sets: 2 },
-        { uuid: 'shoulders-2', sets: 2 },
         { uuid: 'shoulders-3', sets: 2 },
       ],
-      traps: [
-        { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-3', sets: 2 },
-      ],
+      traps: [{ uuid: 'traps-2', sets: 3 }],
       glutes: [
         { uuid: 'glutes-1', sets: 3 },
-        { uuid: 'glutes-2', sets: 2 },
+        { uuid: 'glutes-2', sets: 3 },
       ],
-      forearms: [
-        { uuid: 'forearms-1', sets: 1 },
-        { uuid: 'forearms-2', sets: 1 },
-        { uuid: 'forearms-3', sets: 1 },
-        { uuid: 'forearms-4', sets: 1 },
-      ],
+      abs: [{ uuid: 'abs-1', sets: 4 }],
     },
-    body: ['shoulders', 'traps', 'glutes', 'forearms'],
-    setType: 'hypertrophy',
+    body: ['shoulders', 'traps', 'glutes', 'abs'],
+    setType: 'strength',
   },
 };
 
@@ -183,7 +187,7 @@ export const MAN_4DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
       ],
       traps: [
         { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-2', sets: 1 },
+        { uuid: 'traps-3', sets: 1 },
       ],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },
@@ -241,7 +245,7 @@ export const MAN_4DAYS: Partial<Record<WeekDay, PerfectRoutine>> = {
       ],
       traps: [
         { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-2', sets: 1 },
+        { uuid: 'traps-3', sets: 1 },
       ],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },
@@ -302,7 +306,7 @@ export const MAN_4DAYS_WEDNESDAY_OFF: Partial<Record<WeekDay, PerfectRoutine>> =
       ],
       traps: [
         { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-2', sets: 1 },
+        { uuid: 'traps-3', sets: 1 },
       ],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },
@@ -360,7 +364,7 @@ export const MAN_4DAYS_WEDNESDAY_OFF: Partial<Record<WeekDay, PerfectRoutine>> =
       ],
       traps: [
         { uuid: 'traps-1', sets: 2 },
-        { uuid: 'traps-2', sets: 1 },
+        { uuid: 'traps-3', sets: 1 },
       ],
       biceps: [
         { uuid: 'biceps-1', sets: 2 },

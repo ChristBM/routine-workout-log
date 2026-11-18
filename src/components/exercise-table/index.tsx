@@ -105,6 +105,7 @@ function useExerciseTable() {
       const body = training[g]?.map((group, idx) => {
         const arr = [
           <Checkbox
+            size="md"
             key={`check-box-${group.uuid}-${idx}`}
             aria-label="Select row"
             checked={selected.includes(group.uuid)}
@@ -153,6 +154,7 @@ function useExerciseTable() {
       const tableData: TableData = {
         head: [
           <Checkbox
+            size="md"
             key="check-box-select-all"
             aria-label="Select all"
             checked={selected.length === training[g]?.length}
