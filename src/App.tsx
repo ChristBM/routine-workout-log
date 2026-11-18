@@ -4,6 +4,7 @@ import BodyMap from '@/components/body-map';
 import ExerciseTable from '@/components/exercise-table';
 import LangSwitch from '@/components/lang-switch';
 import Routine from '@/components/routine';
+import UpdateModal from '@/components/update-modal';
 import WeekDay from '@/components/week-day';
 import WorkoutSelector from '@/components/workout-selector';
 import useHandleSetTypeWhenPerfect from '@/hooks/use-handle-set-type-when-perfect';
@@ -79,6 +80,8 @@ export default function App() {
           </>
         }
       />
+
+      <UpdateModal />
     </div>
   );
 }

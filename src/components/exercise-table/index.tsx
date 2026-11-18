@@ -16,6 +16,7 @@ import { getStrenghtLevel } from '@/constants/strenght-level';
 import { GripTranslation, MuscleGroupTranslation, type MuscleGroup } from '@/constants/training';
 import type { Grip } from '@/constants/workouts';
 import { store } from '@/store';
+import RmShower from './rm-shower';
 import s from './exercise-table.module.css';
 
 const columns = {
@@ -128,7 +129,16 @@ function useExerciseTable() {
             />
           </Group>,
           group.name,
-          group.naturalReps ? `${group.naturalReps} reps` : `${group.rm} ` + `LB`,
+          <RmShower
+            key={`rm-btn-${group.uuid}`}
+            text={group.naturalReps ? `${group.naturalReps} reps` : `${group.rm} ` + `LB`}
+            modalData={{
+              id: group.uuid,
+              reps: group.effective[setType].reps,
+              weight: group.effective[setType].weight,
+              naturalReps: group.naturalReps,
+            }}
+          />,
           getStrenghtLevel({ uuid: group.uuid, rm: group.rm, lang }),
           group.approximation || '・',
           setType === 'hypertrophy'

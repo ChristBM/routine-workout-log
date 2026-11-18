@@ -7,15 +7,12 @@ import {
   ActionBar,
   Text,
   RollingNumber,
-  Modal,
   useMantineTheme,
   Group,
-  NumberInput,
   Space,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import type { TrainingSet, TrainingStats, UUIDAllowed } from '@/constants/workouts';
-import { calcApprox, calcRM, type AllowedReps } from '@/functions/rm';
+import type { TrainingSet, UUIDAllowed } from '@/constants/workouts';
+import { calcApprox, type AllowedReps } from '@/functions/rm';
 import { store } from '@/store';
 import s from './routine.module.css';
 
@@ -25,104 +22,15 @@ export default function Routine() {
     lang,
     data,
     active,
-    opened,
     seconds,
-    modalData,
     showActionBar,
-    close,
     nextStep,
-    setLocalState,
     handleFinish,
-    handleSaveUpdates,
     handleSaveImprovements,
   } = useRoutine();
 
   return (
     <div className={s.container}>
-      <Modal
-        opened={opened}
-        onClose={close}
-        title={lang === 'en' ? 'Continuous Improvement' : 'Mejora Progresiva'}
-        centered
-      >
-        {modalData.naturalReps ? (
-          <Text>
-            {lang === 'en'
-              ? 'Do you want to change the number of repetitions using your own body weight?'
-              : '¿Quieres cambiar el número de repeticiones utilizando tu propio peso?'}
-          </Text>
-        ) : (
-          <Text>
-            {lang === 'en'
-              ? 'Do you want to change the 1RM for this exercise?'
-              : '¿Quieres cambiar el 1RM de este ejercicio?'}
-          </Text>
-        )}
-
-        <Space h="sm" />
-
-        <Text style={{ color: theme.colors.neonGreen[3] }}>
-          {modalData.naturalReps
-            ? `${modalData.naturalReps} reps`
-            : `${modalData?.weight} LB x ${modalData?.reps} reps`}
-        </Text>
-
-        {modalData.naturalReps ? null : (
-          <>
-            <Space h="lg" />
-            <Group justify="center">
-              <NumberInput
-                defaultValue={modalData?.weight}
-                value={modalData?.weight}
-                onChange={(value) =>
-                  setLocalState((prev) => ({ ...prev, modalData: { weight: value as number } }))
-                } // setLocalState
-                step={1}
-                min={0}
-                max={1000}
-                label={lang === 'en' ? 'Update weight' : 'Actualizar peso'}
-                description={
-                  lang === 'en'
-                    ? 'This change will recalculate your 1RM for next session'
-                    : 'El cambio recalculará tu 1RM para la próxima sesión'
-                }
-              />
-            </Group>
-          </>
-        )}
-
-        <Space h="xl" />
-
-        <Group justify="center">
-          <NumberInput
-            defaultValue={modalData.naturalReps ? modalData.naturalReps : modalData?.reps}
-            // value={modalData.naturalReps ? modalData.naturalReps : modalData?.reps}
-            onChange={(value) => {
-              if (modalData.naturalReps) {
-                setLocalState((prev) => ({ ...prev, modalData: { naturalReps: value as number } }));
-              } else {
-                setLocalState((prev) => ({ ...prev, modalData: { reps: value as AllowedReps } }));
-              }
-            }}
-            step={1}
-            min={1}
-            max={modalData.naturalReps ? 1000 : 12}
-            label={lang === 'en' ? 'Update reps' : 'Actualizar reps'}
-            description={
-              lang === 'en'
-                ? 'This change will recalculate your 1RM for next session'
-                : 'El cambio recalculará tu 1RM para la próxima sesión'
-            }
-          />
-        </Group>
-
-        <Space h="xl" />
-
-        <Group justify="right">
-          <Button onClick={handleSaveUpdates}>{lang === 'en' ? 'Save' : 'Guardar'}</Button>
-        </Group>
-      </Modal>
-
       <ActionBar radius="md" opened={showActionBar} closeOnEscape>
         <Text size="sm">{lang === 'en' ? 'Rest' : 'Descanso'} →</Text>
         <RollingNumber value={seconds} fz="30px" suffix="s" animationDuration={100} />
@@ -195,7 +103,7 @@ interface SetImprovement {
   naturalReps?: number;
 }
 
-type TrainingData = {
+export type TrainingData = {
   id: UUIDAllowed;
   label: string;
   drop?: string;
@@ -218,7 +126,6 @@ const effeTranslation = {
 type UseRoutineState = {
   data: TrainingData[];
   times: number[];
-  modalData: SetImprovement;
   seconds: number;
 };
 
@@ -226,12 +133,6 @@ const initialValue: UseRoutineState = {
   times: [],
   data: [],
   seconds: 0,
-  modalData: {
-    id: 'back-1',
-    reps: 1,
-    weight: 0,
-    naturalReps: 0,
-  },
 };
 
 function useRoutine() {
@@ -240,12 +141,11 @@ function useRoutine() {
   const [training] = useS(store.globalTraining);
   const [_, setTime] = useS(store.globalToday);
   const [{ workouts }, setWorkouts] = useS(store.globalTodaysWorkout);
-  const [trainingUpdates, setTrainingUpdates] = useS(store.globalTrainingUpdates);
   const [{ selected, setType, showActionBar }, setSelected] = useS(store.globalSelectedExercises);
   const [active, setActive] = useS(store.globalActive);
+  const [__, setShowModal] = useS(store.globalUpdateModal);
 
-  const [{ data, times, modalData }, setLocalState] = useS(initialValue);
-  const [opened, { open, close }] = useDisclosure(false);
+  const [{ data, times }, setLocalState] = useS(initialValue);
   const [seconds, setSeconds] = useS<number>(times[active] ?? 0);
 
   const nextStep = () => {
@@ -265,7 +165,8 @@ function useRoutine() {
   };
 
   const handleSaveImprovements = (ss: TrainingData) => {
-    setLocalState({
+    setShowModal({
+      show: true,
       modalData: {
         id: ss.id,
         reps: ss.modalData.reps,
@@ -273,8 +174,6 @@ function useRoutine() {
         naturalReps: ss.modalData.naturalReps,
       },
     });
-
-    open();
   };
 
   const handleFinish = () => {
@@ -292,38 +191,6 @@ function useRoutine() {
     setSelected({ selected: [], showActionBar: false });
     setLocalState({ data: [] });
     setActive(0);
-  };
-
-  const handleSaveUpdates = () => {
-    let newChange: TrainingStats = {
-      uuid: modalData.id,
-      rm: 0,
-    };
-
-    if (modalData.naturalReps) {
-      newChange = { ...newChange, naturalReps: modalData.naturalReps };
-    } else {
-      newChange = {
-        ...newChange,
-        rm: calcRM({ weight: modalData.weight, maxReps: modalData.reps }),
-      };
-    }
-
-    workouts.forEach((w) => {
-      const oldMarks = trainingUpdates[w] ?? [];
-
-      const updated = oldMarks.map((e) => {
-        if (e.uuid === newChange.uuid) {
-          return newChange.naturalReps ? { ...newChange, rm: e.rm } : { ...newChange };
-        }
-
-        return e;
-      });
-
-      setTrainingUpdates({ [w]: updated });
-    });
-
-    close();
   };
 
   useEffect(() => {
@@ -398,15 +265,10 @@ function useRoutine() {
     lang,
     data,
     active,
-    opened,
     seconds,
-    modalData,
     showActionBar,
-    close,
     nextStep,
-    setLocalState,
     handleFinish,
-    handleSaveUpdates,
     handleSaveImprovements,
   };
 }

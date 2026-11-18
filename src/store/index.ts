@@ -1,10 +1,17 @@
 import { INITIAL_UPDATES, TRAINING, type MuscleGroup } from '@/constants/training';
-import type { TrainingStats, TrainingSet } from '@/constants/workouts';
-import type { SetType, TimeOfRestBetweenSets } from '@/functions/rm';
+import type { TrainingStats, TrainingSet, UUIDAllowed } from '@/constants/workouts';
+import type { AllowedReps, SetType, TimeOfRestBetweenSets } from '@/functions/rm';
 
 export type Lang = 'es' | 'en';
 
 export type RestTime = 'auto' & TimeOfRestBetweenSets; // ver esto
+
+export interface SetImprovement {
+  id: UUIDAllowed;
+  reps: AllowedReps;
+  weight: number;
+  naturalReps?: number;
+}
 
 export type StoreType = {
   globalLang: {
@@ -50,6 +57,13 @@ export type StoreType = {
     value: number;
     readonly key: 'global-active';
     persist?: boolean;
+  };
+  globalUpdateModal: {
+    value: {
+      show: boolean;
+      modalData: SetImprovement;
+    };
+    readonly key: 'global-update-modal';
   };
 };
 
@@ -97,5 +111,17 @@ export const store: StoreType = {
     value: 0,
     key: 'global-active',
     persist: true,
+  },
+  globalUpdateModal: {
+    value: {
+      show: false,
+      modalData: {
+        id: 'back-1',
+        reps: 1,
+        weight: 0,
+        naturalReps: 0,
+      },
+    },
+    key: 'global-update-modal',
   },
 } as const;
