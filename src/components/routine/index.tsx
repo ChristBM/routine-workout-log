@@ -229,7 +229,7 @@ function useRoutine() {
           const arr = [...aArr, ...eArr];
           const tstep = arr.map((ts, idx) => ({
             id: t.uuid,
-            description: t.name,
+            description: t.name[lang],
             drop: t.dropSets && ts === 'e' ? t.effective[setType].drop : undefined,
             label: t.naturalReps
               ? `Natural: ${t.naturalReps} reps`

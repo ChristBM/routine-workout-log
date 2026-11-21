@@ -1,4 +1,5 @@
 import { calcRM, trainingAdvice, type TrainingAdvice } from '@/functions/rm';
+import type { Lang } from '@/store';
 
 export type Grip = 'pronated' | 'supinated' | 'neutral';
 export type SetsApprox = 1 | 2;
@@ -45,7 +46,7 @@ export interface SetData {
 }
 
 export interface TrainingInfo {
-  name: string;
+  name: Record<Lang, string>;
   description?: string;
   icon?: string;
 }
@@ -109,7 +110,10 @@ export const RM_CALVES_1 = calcRM({ weight: 170, maxReps: 4 });
 export const TRAPS: TrainingSet[] = [
   {
     uuid: 'traps-1',
-    name: 'Encogimiento con barrra-trampa [trapecio superior]',
+    name: {
+      es: 'Encogimiento con barrra-trampa [trapecio superior]',
+      en: 'Hex Bar Shrug [Upper Trapezius]',
+    },
     grip: 'neutral',
     rm: RM_TRAPS_1,
     approximation: 1,
@@ -123,7 +127,10 @@ export const TRAPS: TrainingSet[] = [
   },
   {
     uuid: 'traps-2',
-    name: 'Remo cruzado horizontal con cable [trapecio medio]',
+    name: {
+      es: 'Remo cruzado horizontal con cable [trapecio medio]',
+      en: 'Horizontal Cable Cross-Over Row [Middle Trapezius]',
+    },
     grip: 'pronated',
     rm: RM_TRAPS_2,
     effective: {
@@ -136,7 +143,10 @@ export const TRAPS: TrainingSet[] = [
   },
   {
     uuid: 'traps-3',
-    name: 'Elevaciones frontales de disco [trapecio inferior]',
+    name: {
+      es: 'Elevaciones frontales de disco [trapecio inferior]',
+      en: 'Disc Front Raise [Lower Trapezius]',
+    },
     grip: 'neutral',
     rm: RM_TRAPS_3,
     effective: {
@@ -152,7 +162,10 @@ export const TRAPS: TrainingSet[] = [
 export const SHOULDERS: TrainingSet[] = [
   {
     uuid: 'shoulders-1',
-    name: 'Press de Hombros en Máquina [hombro frente-lateral]',
+    name: {
+      es: 'Press de Hombros en Máquina [hombro frente-lateral]',
+      en: 'Machine Shoulder Press [Front-Lateral Shoulder]',
+    },
     grip: 'pronated',
     rm: RM_SHOULDERS_1,
     approximation: 1,
@@ -171,7 +184,10 @@ export const SHOULDERS: TrainingSet[] = [
   },
   {
     uuid: 'shoulders-2',
-    name: 'Elevaciones laterales con cable [hombro lateral]',
+    name: {
+      es: 'Elevaciones laterales con cable [hombro lateral]',
+      en: 'Cable Lateral Raises [Lateral Shoulder]',
+    },
     grip: 'neutral',
     rm: RM_SHOULDERS_2,
     effective: {
@@ -190,7 +206,10 @@ export const SHOULDERS: TrainingSet[] = [
   },
   {
     uuid: 'shoulders-3',
-    name: 'Cruce de cable horizontal - brazos extendidos [hombro posterior]',
+    name: {
+      es: 'Cruce de cable horizontal - brazos extendidos [hombro posterior]',
+      en: 'Horizontal Cable Cross - Arms Extended [Rear Deltoid]',
+    },
     grip: 'neutral',
     rm: RM_SHOULDERS_3,
     effective: {
@@ -212,7 +231,10 @@ export const SHOULDERS: TrainingSet[] = [
 export const CHEST: TrainingSet[] = [
   {
     uuid: 'chest-1',
-    name: 'Press de banca - máquina [pecho medio]',
+    name: {
+      es: 'Press de banca - máquina [pecho medio]',
+      en: 'Bench Press - Machine [Middle Chest]',
+    },
     grip: 'pronated',
     rm: RM_CHEST_1,
     approximation: 1,
@@ -226,7 +248,10 @@ export const CHEST: TrainingSet[] = [
   },
   {
     uuid: 'chest-2',
-    name: 'Press inclinado con cable(Ideal) o mancuernas [pecho superior]',
+    name: {
+      es: 'Press inclinado con cable(Ideal) o mancuernas [pecho superior]',
+      en: 'Incline Press With Cable (Ideal) or Dumbbells [Upper Chest]',
+    },
     grip: 'pronated',
     rm: RM_CHEST_2,
     effective: {
@@ -239,7 +264,10 @@ export const CHEST: TrainingSet[] = [
   },
   {
     uuid: 'chest-3',
-    name: 'Paralelas/Fondos [pecho medio-inferior]',
+    name: {
+      es: 'Paralelas/Fondos [pecho medio-inferior]',
+      en: 'Dips [Lower-Middle Chest]',
+    },
     grip: 'neutral',
     rm: RM_CHEST_3,
     naturalReps: 25,
@@ -256,7 +284,10 @@ export const CHEST: TrainingSet[] = [
 export const BACK: TrainingSet[] = [
   {
     uuid: 'back-1',
-    name: 'Remo en máquina [dorsales]',
+    name: {
+      es: 'Remo en máquina [dorsales]',
+      en: 'Machine Row [Back Muscles]',
+    },
     grip: 'pronated',
     rm: RM_BACK_1,
     approximation: 1,
@@ -270,7 +301,10 @@ export const BACK: TrainingSet[] = [
   },
   {
     uuid: 'back-2',
-    name: 'Jalón vertical en polea agarre cerrado [espalda media]',
+    name: {
+      es: 'Jalón vertical en polea agarre cerrado [espalda media]',
+      en: 'Close-Grip Vertical Pulley Row [Mid-Back]',
+    },
     grip: 'neutral',
     rm: RM_BACK_2,
     effective: {
@@ -283,7 +317,10 @@ export const BACK: TrainingSet[] = [
   },
   {
     uuid: 'back-3',
-    name: 'Jalón en polea a una mano - de pie [media-baja]',
+    name: {
+      es: 'Jalón en polea a una mano - de pie [media-baja]',
+      en: 'One-Handed Pulley Pull-Up - Standing [Medium-Low]',
+    },
     grip: 'neutral',
     rm: RM_BACK_3,
     effective: {
@@ -300,7 +337,10 @@ export const BACK: TrainingSet[] = [
 export const TRICEPS: TrainingSet[] = [
   {
     uuid: 'triceps-1',
-    name: 'Jalones de triceps en polea [cabeza lateral-medial]',
+    name: {
+      es: 'Jalones de triceps en polea [cabeza lateral-medial]',
+      en: 'Triceps Pushdown [Lateral-Medial Head]',
+    },
     grip: 'pronated',
     rm: RM_TRICEPS_1,
     approximation: 1,
@@ -314,7 +354,10 @@ export const TRICEPS: TrainingSet[] = [
   },
   {
     uuid: 'triceps-2',
-    name: 'Extensión de triceps en polea baja - a una mano [cabeza larga]',
+    name: {
+      es: 'Extensión de triceps en polea baja - a una mano [cabeza larga]',
+      en: 'Cable Overhead Tricep Extension - One-Arm [Long Head]',
+    },
     grip: 'neutral',
     rm: RM_TRICEPS_2,
     effective: {
@@ -331,7 +374,10 @@ export const TRICEPS: TrainingSet[] = [
 export const BICEPS: TrainingSet[] = [
   {
     uuid: 'biceps-1',
-    name: 'Curl con barra Z [bíceps completo]',
+    name: {
+      es: 'Curl con barra Z [bíceps completo]',
+      en: 'Z-Bar Curl [Full Biceps]',
+    },
     grip: 'supinated',
     rm: RM_BICEPS_1,
     approximation: 1,
@@ -345,7 +391,10 @@ export const BICEPS: TrainingSet[] = [
   },
   {
     uuid: 'biceps-2',
-    name: 'Predicador en máquina - a una mano [bíceps completo]',
+    name: {
+      es: 'Predicador en máquina - a una mano [bíceps completo]',
+      en: 'One Arm Dumbbell Preacher Curl - One-Arm [Full Biceps]',
+    },
     grip: 'supinated',
     rm: RM_BICEPS_2,
     effective: {
@@ -362,7 +411,10 @@ export const BICEPS: TrainingSet[] = [
 export const FOREARMS: TrainingSet[] = [
   {
     uuid: 'forearms-1',
-    name: 'Curl con barra agarre invertido [antebrazo]',
+    name: {
+      es: 'Curl con barra agarre invertido [antebrazo]',
+      en: 'Reverse Barbell Curl [Forearm]',
+    },
     grip: 'pronated',
     rm: RM_FOREARMS_1,
     effective: {
@@ -380,7 +432,10 @@ export const FOREARMS: TrainingSet[] = [
   },
   {
     uuid: 'forearms-2',
-    name: 'Curl martillo predicador con mancuernas [braquial antebrazo-lateral]',
+    name: {
+      es: 'Curl martillo predicador con mancuernas [braquial antebrazo-lateral]',
+      en: 'Hammer Preacher Curl with Dumbbells [Lateral Brachioradialis]',
+    },
     grip: 'neutral',
     rm: RM_FOREARMS_2,
     effective: {
@@ -398,7 +453,10 @@ export const FOREARMS: TrainingSet[] = [
   },
   {
     uuid: 'forearms-3',
-    name: 'Curl de muñeca con mancuernas palma-abajo [antebrazo arriba]',
+    name: {
+      es: 'Curl de muñeca con mancuernas palma-abajo [antebrazo arriba]',
+      en: 'Palm-Down Dumbbell Wrist Curl [Forearm Up]',
+    },
     grip: 'pronated',
     rm: RM_FOREARMS_3,
     effective: {
@@ -411,7 +469,10 @@ export const FOREARMS: TrainingSet[] = [
   },
   {
     uuid: 'forearms-4',
-    name: 'Curl de muñeca con mancuernas palma-arriba [antebrazo abajo]',
+    name: {
+      es: 'Curl de muñeca con mancuernas palma-arriba [antebrazo abajo]',
+      en: 'Palm-Up Dumbbell Wrist Curl [Lower Forearm]',
+    },
     grip: 'supinated',
     rm: RM_FOREARMS_4,
     effective: {
@@ -427,7 +488,10 @@ export const FOREARMS: TrainingSet[] = [
 export const ABS: TrainingSet[] = [
   {
     uuid: 'abs-1',
-    name: 'Abdominal con polea o máquina [abs]',
+    name: {
+      es: 'Abdominal con polea o máquina [abs]',
+      en: 'Cable Crunch [Abs]',
+    },
     rm: RM_ABS_1,
     effective: {
       strength: trainingAdvice({ rm: RM_ABS_1, setType: 'strength', rest: 150, sets: 4 }),
@@ -447,7 +511,10 @@ export const ABS: TrainingSet[] = [
 export const GLUTES: TrainingSet[] = [
   {
     uuid: 'glutes-1',
-    name: 'Hip Thrust en máquina [glúteo mayor]',
+    name: {
+      es: 'Hip Thrust en máquina [glúteo mayor]',
+      en: 'Machine Hip Thrust [Gluteus Maximus]',
+    },
     rm: RM_GLUTES_1,
     approximation: 1,
     effective: {
@@ -460,7 +527,10 @@ export const GLUTES: TrainingSet[] = [
   },
   {
     uuid: 'glutes-2',
-    name: 'Hip Abductor en máquina [glúteo medio-menor]',
+    name: {
+      es: 'Hip Abductor en máquina [glúteo medio-menor]',
+      en: 'Hip Abductor [Gluteus Medius And Minimus]',
+    },
     rm: RM_GLUTES_2,
     effective: {
       strength: trainingAdvice({ rm: RM_GLUTES_2, setType: 'strength', rest: 90, sets: 2 }),
@@ -473,7 +543,10 @@ export const GLUTES: TrainingSet[] = [
   },
   {
     uuid: 'glutes-3',
-    name: 'Asalto en máquina Smith [glúteo]',
+    name: {
+      es: 'Asalto en máquina Smith [glúteo]',
+      en: 'Smith Machine Squat [Glutes]',
+    },
     rm: RM_GLUTES_3,
     effective: {
       strength: trainingAdvice({ rm: RM_GLUTES_3, setType: 'strength', rest: 180, sets: 2 }),
@@ -488,7 +561,10 @@ export const GLUTES: TrainingSet[] = [
 export const QUADRICEPS: TrainingSet[] = [
   {
     uuid: 'quadriceps-1',
-    name: 'Extensión de piernas - máquina [cuádriceps]',
+    name: {
+      es: 'Extensión de piernas - máquina [cuádriceps]',
+      en: 'Leg Extension [Quadriceps]',
+    },
     rm: RM_QUADRICEPS_1,
     approximation: 1,
     effective: {
@@ -507,7 +583,10 @@ export const QUADRICEPS: TrainingSet[] = [
   },
   {
     uuid: 'quadriceps-2',
-    name: 'Sentadilla Hack - máquina [cuádriceps]',
+    name: {
+      es: 'Sentadilla Hack - máquina [cuádriceps]',
+      en: 'Hack Squat [Quadriceps]',
+    },
     rm: RM_QUADRICEPS_2,
     effective: {
       strength: trainingAdvice({ rm: RM_QUADRICEPS_2, setType: 'strength', rest: 120, sets: 3 }),
@@ -527,7 +606,10 @@ export const QUADRICEPS: TrainingSet[] = [
 export const HIPADDUCTOR: TrainingSet[] = [
   {
     uuid: 'hipAdductor-1',
-    name: 'Aductores en máquina [aductores]',
+    name: {
+      es: 'Aductores en máquina [aductores]',
+      en: 'Hip Adduction [Adductors]',
+    },
     rm: RM_HIPADDUCTOR_1,
     effective: {
       strength: trainingAdvice({ rm: RM_HIPADDUCTOR_1, setType: 'strength', rest: 90, sets: 4 }),
@@ -548,7 +630,10 @@ export const HIPADDUCTOR: TrainingSet[] = [
 export const HAMSTRINGS: TrainingSet[] = [
   {
     uuid: 'hamstrings-1',
-    name: 'Curl femoral sentado [isquiotibiales]',
+    name: {
+      es: 'Curl femoral sentado [isquiotibiales]',
+      en: 'Seated Leg Curl [Hamstrings]',
+    },
     rm: RM_HAMSTRINGS_1,
     approximation: 1,
     effective: {
@@ -567,7 +652,10 @@ export const HAMSTRINGS: TrainingSet[] = [
   },
   {
     uuid: 'hamstrings-2',
-    name: 'Hiperextensiones de espalda [isquitibiales]',
+    name: {
+      es: 'Hiperextensiones de espalda [isquitibiales]',
+      en: 'Back Extension [Hamstrings]',
+    },
     rm: RM_HAMSTRINGS_2,
     naturalReps: 25,
     effective: {
@@ -588,7 +676,10 @@ export const HAMSTRINGS: TrainingSet[] = [
 export const CALVES: TrainingSet[] = [
   {
     uuid: 'calves-1',
-    name: 'Gemelos en máquina [pantorrillas]',
+    name: {
+      es: 'Gemelos en máquina [pantorrillas]',
+      en: 'Machine Calf Raise [Calf]',
+    },
     rm: RM_CALVES_1,
     approximation: 1,
     effective: {

@@ -128,7 +128,7 @@ function useExerciseTable() {
               style={{ backgroundColor: theme.colors.neonGreen[7], padding: '5px' }}
             />
           </Group>,
-          group.name,
+          group.name[lang],
           <RmShower
             key={`rm-btn-${group.uuid}`}
             text={group.naturalReps ? `${group.naturalReps} reps` : `${group.rm} ` + `LB`}
